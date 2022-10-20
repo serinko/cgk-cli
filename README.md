@@ -1,7 +1,7 @@
 # cgk_cmd
 Python tools for Coingecko API
 
-## cgk_cov.py
+## cgk_conv.py
 A simple commandline Python tool to get actual market price of any [asset ("id")](https://api.coingecko.com/api/v3/coins/list) against any [vs currency](https://api.coingecko.com/api/v3/simple/supported_vs_currencies). Automatically counts any chosen amount in both directions. 
 
 **Prerequisites**
