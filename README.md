@@ -6,7 +6,7 @@ A simple commandline Python tool to get actual market price of any [asset ("id")
 
 **Prerequisites**
 
-There 3 Python modules needed. Easy installation with pip.
+There are 3 Python modules needed. Easy installation with pip.
 
 | Module | Installation |
 | --- | --- |
