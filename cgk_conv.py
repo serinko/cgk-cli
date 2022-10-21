@@ -20,16 +20,17 @@ def get_pycoingecko_symbols():
     response_list = r.json()
     return response_list
 
-def display_pycoingecko_ids():
-    response_dicts = get_pycoingecko_ids()
-    for dict in response_dicts:
-        for x in dict:
-            print(dict["id"])
+# Commented redundant
+#def display_pycoingecko_ids():
+#    response_dicts = get_pycoingecko_ids()
+#    for dict in response_dicts:
+#        for x in dict:
+#            print(dict["id"])
 
-def display_pycoingecko_vs_currencies():
-    response_list = get_pycoingecko_symbols()
-    for x in response_list:
-        print(x)
+#def display_pycoingecko_vs_currencies():
+#    response_list = get_pycoingecko_symbols()
+#    for x in response_list:
+#        print(x)
 
 def get_simple_price(id,vs):
     url = \
@@ -139,7 +140,7 @@ def _create_sorted_table(list):
     array = []
     new_list = []
     sorted_list = sorted(list)
-    n = 1
+    n = 0
     for x in sorted_list:
         if n%3 == 0:
             array.append(new_list)
