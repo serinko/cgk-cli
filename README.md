@@ -6,7 +6,7 @@ A simple commandline Python tool - Congecko API based convertor to get an actual
 
 **Prerequisites**
 
-There are 3 Python modules needed. Easy installation with pip.
+There are few Python modules needed. Easy installation with pip.
 
 | Module | Installation |
 | --- | --- |
