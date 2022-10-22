@@ -1,6 +1,16 @@
 # cgk_cmd
 Python tools for Coingecko API
 
+**Donwloading the repository**
+
+Open terminal in a folder where you want to download it and run:
+
+```bash
+$ git clone https://github.com/serinko/cgk_cmd
+
+$ cd cgk_cmd
+```
+
 ## cgk_conv.py
 A simple commandline Python tool - Congecko API based convertor to get an actual market price of any [asset ("id")](https://api.coingecko.com/api/v3/coins/list) (13000+) against any [vs currency](https://api.coingecko.com/api/v3/simple/supported_vs_currencies) (60+), in any given amounty in both ways. 
 
