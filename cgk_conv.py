@@ -33,6 +33,7 @@ def get_pycoingecko_symbols():
 #        print(x)
 
 def get_simple_price(id,vs):
+    """Gets a basic pair price from the API."""
     url = \
         f"https://api.coingecko.com/api/v3/simple/price?ids={id}&vs_currencies={vs}"
 
@@ -42,6 +43,7 @@ def get_simple_price(id,vs):
     return price
 
 def calc_x_price(id,vs,n,switch):
+    """Calculates the price based on pair and amount."""
     price = get_simple_price(id,vs)
     if switch == True:
         x_price=1/price*n
@@ -51,6 +53,7 @@ def calc_x_price(id,vs,n,switch):
     return x_price
 
 def display_result(id,vs,amount,x_price,switch):
+    """Main Function printing the price of chosen crypto and amount."""
     if switch == True:
         msg = f"\n{amount} {vs}  =  {x_price} {id}\n"
     else:
@@ -60,6 +63,7 @@ def display_result(id,vs,amount,x_price,switch):
 
 
 def display_help():
+    """Frontend display menu."""
     msg_0 = "\nCOINGECKO CMD CONVERTOR"
     line = "========================"
     msg_1 = "Usage: \npython3 cgk_conv.py <id> <vs_currency> <amount>"\
@@ -80,6 +84,7 @@ def display_help():
     print(tabulate(tab))
 
 def display_id_list():
+    """Downloads long list of IDs and prints them as a table."""
     response_dicts = get_pycoingecko_ids()
     list = []
     for dict in response_dicts:
@@ -88,6 +93,7 @@ def display_id_list():
     print(tabulate(array))
 
 def display_id_less():
+    """A users custom choice of id currencies.""" 
     coins = [
         "bitcoin",
         "ethereum",
@@ -132,6 +138,7 @@ def display_id_less():
     print(tabulate(array))
 
 def display_vs_currencies():
+    """Downloads vs_currencies and prints them as a table."""
     list = get_pycoingecko_symbols()
     array = _create_sorted_table(list)
     print(tabulate(array))
@@ -154,13 +161,15 @@ def display_vs_currencies():
 #    return array
   
 def _create_sorted_table(lst,collumns=3):
+    """Convert a list of strings into a sorted array with desired n of colummns."""
     [lst.append("") for x in range(collumns - len(lst)%collumns)]
-    a = int(len(lst)/collumns)
-    arr = np.array(sorted(lst)).reshape(a,collumns)
+    rows = int(len(lst)/collumns)
+    arr = np.array(sorted(lst)).reshape(rows,collumns)
     return arr
     
     
 def main_app():
+    """Runs the main program based on passed options"""
     #print(sys.argv)
     if len(sys.argv) < 3:
         if sys.argv[-1] == "id_list":
