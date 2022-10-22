@@ -137,11 +137,11 @@ def display_id_less():
     array = _create_sorted_table(coins)
     print(tabulate(array))
 
-def display_vs_currencies():
-    """Downloads vs_currencies and prints them as a table."""
-    list = get_pycoingecko_symbols()
-    array = _create_sorted_table(list)
-    print(tabulate(array))
+#def display_vs_currencies():
+#    """Downloads vs_currencies and prints them as a table."""
+#    list = get_pycoingecko_symbols()
+#    array = _create_sorted_table(list)
+#    print(tabulate(array))
 
 #def _create_sorted_table(lst):
 #    array = []
@@ -162,9 +162,10 @@ def display_vs_currencies():
   
 def _create_sorted_table(lst,collumns=3):
     """Convert a list of strings into a sorted array with desired n of colummns."""
-    [lst.append("") for x in range(collumns - len(lst)%collumns)]
+    lst = sorted(lst)
+    [lst.append("") for i in range(collumns - len(lst)%collumns)]
     rows = int(len(lst)/collumns)
-    arr = np.array(sorted(lst)).reshape(rows,collumns)
+    arr = np.array(lst).reshape(rows,collumns)
     return arr
     
     
