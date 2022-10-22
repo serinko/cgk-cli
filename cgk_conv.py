@@ -3,7 +3,7 @@
 import sys
 import requests
 from tabulate import tabulate
-
+import numpy as np
 
 def get_pycoingecko_ids():
     url = 'https://api.coingecko.com/api/v3/coins/list'
@@ -136,21 +136,29 @@ def display_vs_currencies():
     array = _create_sorted_table(list)
     print(tabulate(array))
 
-def _create_sorted_table(list):
-    array = []
-    new_list = []
-    sorted_list = sorted(list)
-    n = 0
-    for x in sorted_list:
-        if n%3 == 0:
-            array.append(new_list)
-            new_list = []
-            new_list.append(x)
-            n += 1
-        else:
-            new_list.append(x)
-            n += 1
-    return array
+#def _create_sorted_table(lst):
+#    array = []
+#    new_list = []
+#    sorted_list = sorted(lst)
+#    n = 0
+#    for x in sorted_list:
+#        if n%3 == 0:
+#            array.append(new_list)
+#            new_list = []
+#            new_list.append(x)
+# 
+#        else:
+#            new_list.append(x)
+#        n += 1
+#    array.append(new_list)
+#    return array
+  
+def _create_sorted_table(lst,collumns=3):
+    [lst.append("") for x in range(collumns - len(lst)%collumns)]
+    a = int(len(lst)/collumns)
+    arr = np.array(sorted(lst)).reshape(a,collumns)
+    return arr
+    
     
 def main_app():
     #print(sys.argv)
