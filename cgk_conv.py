@@ -86,10 +86,10 @@ def display_help():
 def display_id_list():
     """Downloads long list of IDs and prints them as a table."""
     response_dicts = get_pycoingecko_ids()
-    list = []
+    lst = []
     for dict in response_dicts:
-        list.append(dict["id"])
-    array = _create_sorted_table(list)
+        lst.append(dict["id"])
+    array = get_sorted_array(lst)
     print(tabulate(array))
 
 def display_id_less():
@@ -134,14 +134,14 @@ def display_id_less():
         "usd-coin",
         "tether",
         ]
-    array = _create_sorted_table(coins)
+    array = get_sorted_array(coins)
     print(tabulate(array))
 
-#def display_vs_currencies():
-#    """Downloads vs_currencies and prints them as a table."""
-#    list = get_pycoingecko_symbols()
-#    array = _create_sorted_table(list)
-#    print(tabulate(array))
+def display_vs_currencies():
+    """Downloads vs_currencies and prints them as a table."""
+    lst = get_pycoingecko_symbols()
+    array = get_sorted_array(lst)
+    print(tabulate(array))
 
 #def _create_sorted_table(lst):
 #    array = []
@@ -160,12 +160,13 @@ def display_id_less():
 #    array.append(new_list)
 #    return array
   
-def _create_sorted_table(lst,collumns=3):
+def get_sorted_array(lst,columns=3):
     """Convert a list of strings into a sorted array with desired n of colummns."""
     lst = sorted(lst)
-    [lst.append("") for i in range(collumns - len(lst)%collumns)]
-    rows = int(len(lst)/collumns)
-    arr = np.array(lst).reshape(rows,collumns)
+    x = columns - len(lst)%columns
+    [lst.append("") for i in range(x) if x < columns]
+    rows = int(len(lst)/columns)
+    arr = np.array(lst).reshape(rows,columns)
     return arr
     
     
