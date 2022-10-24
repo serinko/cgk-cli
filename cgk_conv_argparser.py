@@ -173,21 +173,26 @@ def main_app():
         display_result(id,vs,amount,x_price,switch)
 
 def parser_main():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("-i","--id",
+    
+    parser = argparse.ArgumentParser()          
+    
+    parser.add_argument("id", default="store_true",
                     help="add an id of an asset to convert")
-    parser.add_argument("-v", "--vs_currency", 
-                    help="add a symbol of a currency to convert to")
-    parser.add_argument("-n","--amount", type=float,
+    parser.add_argument("vs_currency", help="add a symbol of a currency to convert to")
+    parser.add_argument("-n","--amount", type=float, default=1,
                     help="price multiplier")
-    parser.add_argument("-s", "--switch", help="switches id and vs_currency",action="store_true")
+    parser.add_argument("-s", "--switch", help="switches id and vs_currency", default="store_false")
+    
+        
     parser.add_argument("--id_list",
-                    help="displays all convertable coin ids (over 13000 items!)")
+                    help="displays all convertable coin ids (over 13000 items!)", action="store_true")
     parser.add_argument("--id_less",
-                    help="displays shortened list of convertable coin ids")
+                    help="displays shortened list of convertable coin ids", action="store_true")
     parser.add_argument("--vs_list",
-                    help="displays all vs currencies (~60items)")                
+                    help="displays all vs currencies (~60items)", action="store_true")  
+
     args = parser.parse_args()
+
     
     a = args.id
     b = args.vs_currency
@@ -197,20 +202,20 @@ def parser_main():
     else:
         s = False
     
-    if len(args) == 1:
-        if args.id_list:
-            display_id_list()
-        elif args.id_less:
-            display_id_less()
-        elif args.vs_list:
-            display_vs_currencies()
-    if len(args) > 1:
-        if args.amount:
-            x_price = calc_x_price(a,b,n,s)
-            display_result(a,b,n,s)
-        else:
-            x_price = calc_x_price(a,b,n,s)
-            display_result(a,b,n,s)
+
+    if args.id_list:
+        display_id_list()
+    elif args.id_less:
+        display_id_less()
+    elif args.vs_list:
+        display_vs_currencies()
+
+    if args.amount:
+        x_price = calc_x_price(a,b,n,s)
+        display_result(a,b,n,x_price,s)
+    else:
+        x_price = calc_x_price(a,b,n,s)
+        display_result(a,b,n,x_price,s)
 
 if __name__ == '__main__':
 #    main_app()
