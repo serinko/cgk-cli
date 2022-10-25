@@ -127,6 +127,8 @@ def parser_main():
             description='''Convert any asset of any amount in terminal.''',
             epilog='''Let there be dark!'''
         )
+    parser.add_argument("-v","--version", action="version", version='%(prog)s 2.1.1')
+    # List sub-command parser
     subparsers = parser.add_subparsers()
     parser_convert = subparsers.add_parser('convert', help=' -h    shows all the options')
     parser_list = subparsers.add_parser('list', help=' -h   shows all the options')
@@ -140,11 +142,7 @@ def parser_main():
 
     parser_convert.add_argument("-s", "--switch",
                     action="store_true",
-                    help="id <--> vs_currency (monero to usd <--> usd to monero)")       
-    parser.add_argument("-v","--version", action="version", version='%(prog)s 2.0.1')
-    
-    
-    # List sub-command parser
+                    help="id <--> vs_currency (monero to usd <--> usd to monero)")     
     parser_list = subparsers.add_parser('list')
     parser_list.add_argument("-A","--id_all",
                     help="displays all convertable coin ids (over 13000 items!)", action="store_true")
