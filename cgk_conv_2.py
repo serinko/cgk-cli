@@ -145,14 +145,14 @@ def parser_main():
     
     args = parser.parse_args()
 
-    a = args.id
-    b = args.vs_currency
+    id = args.id
+    vs_currency = args.vs_currency
     n = args.amount
-    s = args.switch
+    sw = args.switch
 
-    if a and b:
-        x_price = calc_x_price(a,b,n,s)
-        display_result(a,b,n,x_price,s)
+    if id and vs_currency:
+        x_price = calc_x_price(id,vs_currency,n,sw)
+        display_result(id,vs_currency,n,x_price,sw)
     else:
         if args.id_list:
             display_id_list()
