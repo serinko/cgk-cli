@@ -121,12 +121,12 @@ def get_sorted_array(lst,columns=3):
 
 def parser_main():
     """Main function initializing ArgumentParser, storing arguments and executing commands."""    
+    # Top level parser
     parser = argparse.ArgumentParser(
             prog='Coingecko Commandline Convertor',
             description='''Convert any asset of any amount in terminal.''',
             epilog='''Let there be dark!'''
         )
-    
     parser.add_argument("id", nargs='?', default="store_false",
                     help="add an id of an asset to convert")
     parser.add_argument("vs_currency", nargs='?', 
@@ -137,13 +137,19 @@ def parser_main():
     parser.add_argument("-s", "--switch",
                     action="store_true",
                     help="id <--> vs_currency (monero to usd <--> usd to monero)")       
-    parser.add_argument("--id_list",
+    parser.add_argument("-v","--version", action="version", version='%(prog)s 2.0.1')
+    
+    subparsers = parser.add_subparsers(help='{list -h} to display options')
+    
+    # List sub-command parser
+    parser_lst = subparsers.add_parser('list')
+    parser_lst.add_argument("-A","--id_all",
                     help="displays all convertable coin ids (over 13000 items!)", action="store_true")
-    parser.add_argument("--id_less",
+    parser_lst.add_argument("-L","--id_less",
                     help="displays a shortened list of convertable coin ids", action="store_true")
-    parser.add_argument("--vs_list",
+    parser_lst.add_argument("-V","--vs_list",
                     help="displays all vs currencies (~60items)", action="store_true")  
-    parser.add_argument("-V","--version", action="version", version='%(prog)s 2.0.1')
+
     
     
     args = parser.parse_args()
@@ -157,7 +163,7 @@ def parser_main():
         x_price = calc_x_price(id,vs_currency,n,sw)
         display_result(id,vs_currency,n,x_price,sw)
     else:
-        if args.id_list:
+        if args.id_all:
             display_id_list()
         elif args.id_less:
             display_id_less()
