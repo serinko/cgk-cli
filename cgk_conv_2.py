@@ -127,48 +127,84 @@ def parser_main():
             description='''Convert any asset of any amount in terminal.''',
             epilog='''Let there be dark!'''
         )
-    parser.add_argument("id", nargs='?', default="store_false",
+    subparsers = parser.add_subparsers()
+    parser_convert = subparsers.add_parser('convert')
+    parser_list = subparsers.add_parser('list')
+        
+        
+    parser_convert.add_argument("id", nargs='?',
                     help="add an id of an asset to convert")
-    parser.add_argument("vs_currency", nargs='?', 
+    parser_convert.add_argument("vs_currency", nargs='?',
                     help="add a symbol of a currency to convert to")
-    parser.add_argument("amount", type=float, nargs='?',default=1,
+    parser_convert.add_argument("amount", type=float, nargs='?',default=1,
                     help="price multiplier (default = 1)")
 
-    parser.add_argument("-s", "--switch",
+    parser_convert.add_argument("-s", "--switch",
                     action="store_true",
                     help="id <--> vs_currency (monero to usd <--> usd to monero)")       
     parser.add_argument("-v","--version", action="version", version='%(prog)s 2.0.1')
     
-    subparsers = parser.add_subparsers(help='{list -h} to display options')
     
     # List sub-command parser
-    parser_lst = subparsers.add_parser('list')
-    parser_lst.add_argument("-A","--id_all",
+    parser_list = subparsers.add_parser('list')
+    parser_list.add_argument("-A","--id_all",
                     help="displays all convertable coin ids (over 13000 items!)", action="store_true")
-    parser_lst.add_argument("-L","--id_less",
+    parser_list.add_argument("-L","--id_less",
                     help="displays a shortened list of convertable coin ids", action="store_true")
-    parser_lst.add_argument("-V","--vs_list",
+    parser_list.add_argument("-V","--vs_list",
                     help="displays all vs currencies (~60items)", action="store_true")  
-
     
-    
-    args = parser.parse_args()
+    args = parser.parse_args()   
 
-    id = args.id
-    vs_currency = args.vs_currency
-    n = args.amount
-    sw = args.switch
+    try:
+        if args.id and args.vs_currency:
+            id = args.id
+            vs_currency = args.vs_currency
+            n = args.amount
+            sw = args.switch
+            x_price = calc_x_price(id,vs_currency,n,sw)
+            display_result(id,vs_currency,n,x_price,sw)
+    except AttributeError: 
+        pass          
+#                
+#    else:
+#        id = args.id
+#        vs_currency = args.vs_currency
+#        n = args.amount
+#        sw = args.switch
+#        x_price = calc_x_price(id,vs_currency,n,sw)
+#        display_result(id,vs_currency,n,x_price,sw)
 
-    if id and vs_currency:
-        x_price = calc_x_price(id,vs_currency,n,sw)
-        display_result(id,vs_currency,n,x_price,sw)
-    else:
+
+    try:
         if args.id_all:
             display_id_list()
         elif args.id_less:
             display_id_less()
         elif args.vs_list:
-            display_vs_currencies()
+            display_vs_currencies()        
+#        if args.id_all and args.id_less and args.vs_list in args:
+#            print("trying list")
+    except AttributeError:
+        pass 
+#    else:
+#        if args.id_all in args:
+#            display_id_list()
+#        elif args.id_less in args:
+#            display_id_less()
+#        elif args.vs_list in args:
+#            display_vs_currencies()
+
+    print(type(args),args)
+
+#    if args.id in args and args.vs_currency in args:
+#        id = args.id
+#        vs_currency = args.vs_currency
+#        n = args.amount
+#        sw = args.switch
+#        x_price = calc_x_price(id,vs_currency,n,sw)
+#        display_result(id,vs_currency,n,x_price,sw)
+
     
 
 if __name__ == '__main__':
