@@ -176,10 +176,10 @@ def parser_main():
     
     parser = argparse.ArgumentParser()          
     
-    parser.add_argument("id", default="store_false",
+    parser.add_argument("id", nargs='?', default="store_false",
                     help="add an id of an asset to convert")
-    parser.add_argument("vs_currency", help="add a symbol of a currency to convert to")
-    parser.add_argument("amount", type=float, default=1,
+    parser.add_argument("vs_currency", nargs='?', help="add a symbol of a currency to convert to")
+    parser.add_argument("amount", type=float, nargs='?',default=1,
                     help="price multiplier")
     parser.add_argument("-s", "--switch", help="switches id and vs_currency", default="store_false")
     
@@ -193,14 +193,18 @@ def parser_main():
 
     args = parser.parse_args()
 
-    
-    print(f"id = {args.id}")
-    print(f"vs = {args.vs_currency}")
-    print(f"amount = {args.amount}")
-    
-    print(f"id_list = {args.id_list}")
-    print(f"vs_list = {args.vs_list}")
-    print(f"id_less = {args.id_less}")
+    if args.id and args.vs_currency:
+        print(f"id = {args.id}")
+        print(f"vs = {args.vs_currency}")
+        print(f"amount = {args.amount}")
+    else:
+        print(f"amount = None")
+        if args.id_list:
+            print(f"id_list = {args.id_list}")
+        elif args.vs_list:
+            print(f"vs_list = {args.vs_list}")
+        elif args.id_less:
+            print(f"id_less = {args.id_less}")
     
     
     
@@ -214,7 +218,7 @@ def parser_main():
 #        s = False
 #    
 #    if args.id == False or args.vs_currency == False:
-#        n = 0
+#        n = False
 #        if args.id_list:
 #            display_id_list()
 #        elif args.id_less:
