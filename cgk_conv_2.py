@@ -1,5 +1,7 @@
 """Simple commandline tool to get actual price of any coin on Coingecko and its multiples, modified with argparse"""
 
+# TODO: Update README for non experienced users.
+
 import requests
 from tabulate import tabulate
 import numpy as np
