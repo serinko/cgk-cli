@@ -128,8 +128,8 @@ def parser_main():
             epilog='''Let there be dark!'''
         )
     subparsers = parser.add_subparsers()
-    parser_convert = subparsers.add_parser('convert', help='<convert -h> to see all options')
-    parser_list = subparsers.add_parser('list', help='<list -h> to see all the options')
+    parser_convert = subparsers.add_parser('convert', help=' -h    shows all the options')
+    parser_list = subparsers.add_parser('list', help=' -h   shows all the options')
         
         
     parser_convert.add_argument("id", nargs='?',
