@@ -1,7 +1,7 @@
 """Simple commandline tool to get actual price of any coin on Coingecko and its multiples, modified with argparse"""
 
 # TODO: 
-# 1) Make optional commands into sub commands https://docs.python.org/3/library/argparse.html#sub-commands
+# DONE: 1) Make optional commands into sub commands https://docs.python.org/3/library/argparse.html#sub-commands
 # 2) Add colorama style https://pypi.org/project/colorama/
 # 3) Update README for non experienced users.
 
@@ -130,8 +130,7 @@ def parser_main():
     subparsers = parser.add_subparsers()
     parser_convert = subparsers.add_parser('convert', help=' -h    shows all the options')
     parser_list = subparsers.add_parser('list', help=' -h   shows all the options')
-        
-        
+            
     parser_convert.add_argument("id", nargs='?',
                     help="add an id of an asset to convert")
     parser_convert.add_argument("vs_currency", nargs='?',
@@ -166,15 +165,6 @@ def parser_main():
             display_result(id,vs_currency,n,x_price,sw)
     except AttributeError: 
         pass          
-#                
-#    else:
-#        id = args.id
-#        vs_currency = args.vs_currency
-#        n = args.amount
-#        sw = args.switch
-#        x_price = calc_x_price(id,vs_currency,n,sw)
-#        display_result(id,vs_currency,n,x_price,sw)
-
 
     try:
         if args.id_all:
@@ -183,28 +173,8 @@ def parser_main():
             display_id_less()
         elif args.vs_list:
             display_vs_currencies()        
-#        if args.id_all and args.id_less and args.vs_list in args:
-#            print("trying list")
     except AttributeError:
         pass 
-#    else:
-#        if args.id_all in args:
-#            display_id_list()
-#        elif args.id_less in args:
-#            display_id_less()
-#        elif args.vs_list in args:
-#            display_vs_currencies()
-
-#    print(type(args),args)
-
-#    if args.id in args and args.vs_currency in args:
-#        id = args.id
-#        vs_currency = args.vs_currency
-#        n = args.amount
-#        sw = args.switch
-#        x_price = calc_x_price(id,vs_currency,n,sw)
-#        display_result(id,vs_currency,n,x_price,sw)
-
     
 
 if __name__ == '__main__':
