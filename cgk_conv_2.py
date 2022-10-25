@@ -1,6 +1,9 @@
 """Simple commandline tool to get actual price of any coin on Coingecko and its multiples, modified with argparse"""
 
-# TODO: Update README for non experienced users.
+# TODO: 
+# 1) Make optional commands into sub commands https://docs.python.org/3/library/argparse.html#sub-commands
+# 2) Add colorama style https://pypi.org/project/colorama/
+# 3) Update README for non experienced users.
 
 import requests
 from tabulate import tabulate
