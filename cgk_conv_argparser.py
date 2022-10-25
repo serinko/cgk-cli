@@ -176,10 +176,10 @@ def parser_main():
     
     parser = argparse.ArgumentParser()          
     
-    parser.add_argument("id", default="store_true",
+    parser.add_argument("id", default="store_false",
                     help="add an id of an asset to convert")
     parser.add_argument("vs_currency", help="add a symbol of a currency to convert to")
-    parser.add_argument("-n","--amount", type=float, default=1,
+    parser.add_argument("amount", type=float, default=1,
                     help="price multiplier")
     parser.add_argument("-s", "--switch", help="switches id and vs_currency", default="store_false")
     
@@ -194,28 +194,40 @@ def parser_main():
     args = parser.parse_args()
 
     
-    a = args.id
-    b = args.vs_currency
-    n = args.amount
-    if args.switch == True:
-        s = True
-    else:
-        s = False
+    print(f"id = {args.id}")
+    print(f"vs = {args.vs_currency}")
+    print(f"amount = {args.amount}")
     
+    print(f"id_list = {args.id_list}")
+    print(f"vs_list = {args.vs_list}")
+    print(f"id_less = {args.id_less}")
+    
+    
+    
+#    a = args.id
+#    b = args.vs_currency
+#    n = args.amount
+#    
+#    if args.switch == True:
+#        s = True
+#    else:
+#        s = False
+#    
+#    if args.id == False or args.vs_currency == False:
+#        n = 0
+#        if args.id_list:
+#            display_id_list()
+#        elif args.id_less:
+#            display_id_less()
+#        elif args.vs_list:
+#            display_vs_currencies()
 
-    if args.id_list:
-        display_id_list()
-    elif args.id_less:
-        display_id_less()
-    elif args.vs_list:
-        display_vs_currencies()
-
-    if args.amount:
-        x_price = calc_x_price(a,b,n,s)
-        display_result(a,b,n,x_price,s)
-    else:
-        x_price = calc_x_price(a,b,n,s)
-        display_result(a,b,n,x_price,s)
+#    if args.amount:
+#        x_price = calc_x_price(a,b,n,s)
+#        display_result(a,b,n,x_price,s)
+#    else:
+#        x_price = calc_x_price(a,b,n,s)
+#        display_result(a,b,n,x_price,s)
 
 if __name__ == '__main__':
 #    main_app()
