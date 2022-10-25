@@ -178,10 +178,13 @@ def parser_main():
     
     parser.add_argument("id", nargs='?', default="store_false",
                     help="add an id of an asset to convert")
-    parser.add_argument("vs_currency", nargs='?', help="add a symbol of a currency to convert to")
+    parser.add_argument("vs_currency", nargs='?', 
+                    help="add a symbol of a currency to convert to")
     parser.add_argument("amount", type=float, nargs='?',default=1,
                     help="price multiplier")
-    parser.add_argument("-s", "--switch", help="switches id and vs_currency", default="store_false")
+    parser.add_argument("-s", "--switch",
+                    action="store_true",
+                    help="switches id and vs_currency")
     
         
     parser.add_argument("--id_list",
@@ -197,6 +200,7 @@ def parser_main():
         print(f"id = {args.id}")
         print(f"vs = {args.vs_currency}")
         print(f"amount = {args.amount}")
+        print(f"sw = {args.switch}")
     else:
         print(f"amount = None")
         if args.id_list:
