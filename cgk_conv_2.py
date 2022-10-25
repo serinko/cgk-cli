@@ -195,7 +195,7 @@ def parser_main():
 #        elif args.vs_list in args:
 #            display_vs_currencies()
 
-    print(type(args),args)
+#    print(type(args),args)
 
 #    if args.id in args and args.vs_currency in args:
 #        id = args.id
