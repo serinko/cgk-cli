@@ -46,7 +46,7 @@ Examples:
 * How much Bitcoin is 100 Monero?
 `python3 cgk_cmd_2.py conv monero btc 100`
 * How much Monero is 100 Bitcoin?
-'python3 cgk_cmd_2.py conv monero btc 100 -s`
+`python3 cgk_cmd_2.py conv monero btc 100 -s`
 
 
 ## cgk_conv.py
