@@ -129,9 +129,9 @@ def parser_main():
         )
     parser.add_argument("-v","--version", action="version", version='%(prog)s 2.1.1')
     # List sub-command parser
-    subparsers = parser.add_subparsers()
-    parser_convert = subparsers.add_parser('convert', help=' -h    shows all the options')
-    parser_list = subparsers.add_parser('list', help=' -h   shows all the options')
+    subparsers = parser.add_subparsers(help="{-h} shows all the options")
+    parser_convert = subparsers.add_parser('conv',help='convert function')
+    parser_list = subparsers.add_parser('list', help='displays list of convertable coins')
             
     parser_convert.add_argument("id", nargs='?',
                     help="add an id of an asset to convert")
@@ -142,8 +142,7 @@ def parser_main():
 
     parser_convert.add_argument("-s", "--switch",
                     action="store_true",
-                    help="id <--> vs_currency (monero to usd <--> usd to monero)")     
-    parser_list = subparsers.add_parser('list')
+                    help="id <--> vs_currency (monero to usd <--> usd to monero)")
     parser_list.add_argument("-A","--id_all",
                     help="displays all convertable coin ids (over 13000 items!)", action="store_true")
     parser_list.add_argument("-L","--id_less",
