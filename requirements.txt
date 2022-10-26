@@ -1,0 +1,4 @@
+requests
+tabulate
+numpy
+argparse
