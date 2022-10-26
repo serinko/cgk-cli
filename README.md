@@ -34,7 +34,7 @@ Navigate to the directory where you want to have the folder and open terminal.
 
 * *Convert*:
     - Need to know an asset ["id"](https://api.coingecko.com/api/v3/coins/list) and [vs_currency](https://api.coingecko.com/api/v3/simple/supported_vs_currencies).
-    - Run `python3 cgk_cmd_2.py conv <id> <vs_currency> <(--amount)> <(--switch)>
+    - Run `python3 cgk_cmd_2.py conv <id> <vs_currency> <(--amount)> <(--switch)>`
     - Help `python3 cgk_cmd_2.py conv -h`
     - argument `-s` or `--switch` in the end swaps the direction of conversion (monero to btc --> btc to monero)
 
