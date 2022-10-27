@@ -12,7 +12,8 @@ $ cd cgk_cmd
 ```
 
 ## ckg_conv_2.py
-A simple commandline app (v2) to get actual price of any coin on Coingecko and its multiples, using Coingecko API - modified with argparse.
+A simple commandline app to get actual price of any coin on Coingecko and its multiples, using Coingecko API.
+    - *--version: 2.0 - modified with argparse, 2.1 - sorted into subcommands, 2.2 - added colorama.*
 
 **Install**
 

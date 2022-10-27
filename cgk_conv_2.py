@@ -1,10 +1,5 @@
 """Simple commandline tool to get actual price of any coin on Coingecko and its multiples, modified with argparse"""
 
-# TODO: 
-# DONE: 1) Make optional commands into sub commands https://docs.python.org/3/library/argparse.html#sub-commands
-# 2) Add colorama style https://pypi.org/project/colorama/
-# 3) Update README for non experienced users.
-
 import requests
 from tabulate import tabulate
 import numpy as np
@@ -50,11 +45,7 @@ def display_result(id,vs,amount,x_price,switch):
     else:
         msg = f"\n{amount} {id}  = {x_price} {vs}\n"
     print(Fore.CYAN + Style.BRIGHT + msg)
-#    print(Fore.RED + 'some red text')
-#    print(Back.GREEN + 'and with a green background')
-#    print(Style.DIM + 'and in dim text')
-#    print(Style.RESET_ALL)
-#    print('back to normal now')
+
 
 def display_id_list():
     """Downloads long list of IDs and prints them as a table."""
@@ -129,11 +120,11 @@ def parser_main():
     """Main function initializing ArgumentParser, storing arguments and executing commands."""    
     # Top level parser
     parser = argparse.ArgumentParser(
-            prog= Fore.YELLOW + Style.BRIGHT + 'Coingecko Commandline Convertor' + Style.RESET_ALL,
+            prog= Style.BRIGHT + 'Coingecko Commandline Convertor' + Style.RESET_ALL,
             description='''Convert any asset of any amount in terminal.''',
-            epilog='''Let there be dark!'''
+            epilog=Style.DIM + '''Let there be dark!''' + Style.RESET_ALL
         )
-    parser.add_argument("-v","--version", action="version", version='%(prog)s 2.1.1')
+    parser.add_argument("-v","--version", action="version", version='%(prog)s 2.2')
     # List sub-command parser
     subparsers = parser.add_subparsers(help="{-h} shows all the options")
     parser_convert = subparsers.add_parser('conv',help='convert function')
