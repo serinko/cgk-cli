@@ -154,7 +154,7 @@ def parser_main():
                     help="add an id of an asset to convert")
     parser_convert.add_argument("vs_currency",
                     help="add a symbol of a currency to convert to")
-    parser_convert.add_argument("amount", type=float, default=1,
+    parser_convert.add_argument("amount", type=float, nargs='?', default=1,
                     help="price multiplier (default = 1)")
     parser_convert.add_argument("-s", "--switch",
                     action="store_true",
