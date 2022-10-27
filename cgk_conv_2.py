@@ -9,6 +9,7 @@ import requests
 from tabulate import tabulate
 import numpy as np
 import argparse
+from colorama import Fore, Back, Style
 
 def get_pycoingecko_ids():
     """Gets a list of all coin ids from coingecko API."""
@@ -48,7 +49,12 @@ def display_result(id,vs,amount,x_price,switch):
         msg = f"\n{amount} {vs}  =  {x_price} {id}\n"
     else:
         msg = f"\n{amount} {id}  = {x_price} {vs}\n"
-    print(msg)
+    print(Fore.CYAN + Style.BRIGHT + msg)
+#    print(Fore.RED + 'some red text')
+#    print(Back.GREEN + 'and with a green background')
+#    print(Style.DIM + 'and in dim text')
+#    print(Style.RESET_ALL)
+#    print('back to normal now')
 
 def display_id_list():
     """Downloads long list of IDs and prints them as a table."""
@@ -123,7 +129,7 @@ def parser_main():
     """Main function initializing ArgumentParser, storing arguments and executing commands."""    
     # Top level parser
     parser = argparse.ArgumentParser(
-            prog='Coingecko Commandline Convertor',
+            prog= Fore.YELLOW + Style.BRIGHT + 'Coingecko Commandline Convertor' + Style.RESET_ALL,
             description='''Convert any asset of any amount in terminal.''',
             epilog='''Let there be dark!'''
         )
