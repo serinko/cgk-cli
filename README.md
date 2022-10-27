@@ -36,7 +36,7 @@ Make executable:
     - argument `-s` or `--switch` in the end swaps the direction of conversion (monero to btc --> btc to monero)
 
 * *List [L]*:
-    - To display all coin ids or vs_currency symbols, run `./cgk_cmd_2.py L -h`
+    - To display all coin ids or vs_currency symbols, run `./cgk.py L -h`
     
 Examples:
 
