@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 """Simple commandline tool to get actual price of any coin on Coingecko and its multiples, modified with argparse"""
 
 import requests

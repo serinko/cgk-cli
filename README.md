@@ -11,7 +11,7 @@ $ git clone https://github.com/serinko/cgk_cmd
 $ cd cgk_cmd
 ```
 
-## ckg_conv_2.py
+## ckg.py
 A simple commandline app to get actual price of any coin on Coingecko and its multiples, using Coingecko API.
     - *--version: 2.0 - modified with argparse, 2.1 - sorted into subcommands, 2.2 - added colorama.*
 
@@ -23,20 +23,26 @@ Navigate to the directory where you want to have the folder and open terminal.
 
 `cd cgk_cmd`
 
+Install required modules:
+
 `pip3 install requirements.txt`
+
+Make executable:
+
+`chmod +x cgk.py`
 
 **Usage**
 
 * Print help:
 
-`python3 cgk_cmd_2.py --help`
+`./cgk.py --help`
 
 *SubCommands*
 
 * *Convert*:
     - Need to know an asset ["id"](https://api.coingecko.com/api/v3/coins/list) and [vs_currency](https://api.coingecko.com/api/v3/simple/supported_vs_currencies).
-    - Run `python3 cgk_cmd_2.py conv <id> <vs_currency> <(--amount)> <(--switch)>`
-    - Help `python3 cgk_cmd_2.py conv -h`
+    - Run `./cgk.py conv <id> <vs_currency> <(--amount)> <(--switch)>`
+    - Help `./cgk.py conv -h`
     - argument `-s` or `--switch` in the end swaps the direction of conversion (monero to btc --> btc to monero)
 
 * *List*:
@@ -45,12 +51,15 @@ Navigate to the directory where you want to have the folder and open terminal.
 Examples:
 
 * How much Bitcoin is 100 Monero?
-`python3 cgk_cmd_2.py conv monero btc 100`
+`./cgk.py conv monero btc 100`
 * How much Monero is 100 Bitcoin?
-`python3 cgk_cmd_2.py conv monero btc 100 -s`
+`./cgk.py conv monero btc 100 -s`
 
 
 ## cgk_conv.py
+
+***An older and simplier version of ckg.py.***
+
 A simple commandline Python tool - Congecko API based convertor to get an actual market price of any [asset ("id")](https://api.coingecko.com/api/v3/coins/list) (13000+) against any [vs currency](https://api.coingecko.com/api/v3/simple/supported_vs_currencies) (60+), in any given amounty in both ways. 
 
 **Prerequisites**
