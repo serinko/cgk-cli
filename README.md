@@ -40,20 +40,22 @@ Make executable:
 *SubCommands*
 
 * *Convert*:
-    - Need to know an asset ["id"](https://api.coingecko.com/api/v3/coins/list) and [vs_currency](https://api.coingecko.com/api/v3/simple/supported_vs_currencies).
-    - Run `./cgk.py conv <id> <vs_currency> <(--amount)> <(--switch)>`
-    - Help `./cgk.py conv -h`
+    - Need to know an asset ["id"](https://api.coingecko.com/api/v3/coins/list) and [vs_currency](https://api.coingecko.com/api/v3/simple/supported_vs_currencies). Amount default is set to = 1.
+    - Run `./cgk.py C [id] [vs_currency>] ([amount] [--switch])`
+    - Help `./cgk.py C -h`
     - argument `-s` or `--switch` in the end swaps the direction of conversion (monero to btc --> btc to monero)
 
 * *List*:
-    - To display all coin ids or vs_currency symbols, run `python3 cgk_cmd_2.py list -h`
+    - To display all coin ids or vs_currency symbols, run `./cgk_cmd_2.py L -h`
     
 Examples:
 
 * How much Bitcoin is 100 Monero?
-`./cgk.py conv monero btc 100`
+`./cgk.py C monero btc 100`
 * How much Monero is 100 Bitcoin?
-`./cgk.py conv monero btc 100 -s`
+`./cgk.py C monero btc 100 -s`
+* What vs_currencies can be used:
+`./cgk.py L --vs_list` or shorter `./cgk.py L -v`.
 
 
 ## cgk_conv.py

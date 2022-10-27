@@ -138,7 +138,7 @@ def parser_main():
             description='''Convert any asset of any amount in terminal.''',
             epilog=Style.DIM + '''Let there be dark!''' + Style.RESET_ALL
         )
-    parser.add_argument("-v","--version", action="version", version='%(prog)s 2.5')
+    parser.add_argument("-V","--version", action="version", version='%(prog)s 2.5')
     # List sub-command parser
     subparsers = parser.add_subparsers(help="{subcommand}[-h] shows all the options")
     parser_convert = subparsers.add_parser('convert',help='convert subcommand {C}[id][vs_currency]([--amount][--switch])', aliases=['c','C','co', 'conv'])
@@ -158,11 +158,11 @@ def parser_main():
 #    args = parser.parse_args()
 #    args.func(args)
     
-    parser_list.add_argument("-A","--id_all",
+    parser_list.add_argument("-a","--id_all",
                     help="displays all convertable coin ids (over 13000 items!)", action="store_true")
-    parser_list.add_argument("-L","--id_less",
+    parser_list.add_argument("-l","--id_less",
                     help="displays a shortened list of convertable coin ids", action="store_true")
-    parser_list.add_argument("-V","--vs_list",
+    parser_list.add_argument("-v","--vs_list",
                     help="displays all vs currencies (~60items)", action="store_true")
                     
     parser_list.set_defaults(func=display_list)
