@@ -7,6 +7,7 @@ from tabulate import tabulate
 import numpy as np
 import argparse
 from colorama import Fore, Back, Style
+import sys
 
 def get_pycoingecko_ids():
     """Gets a list of all coin ids from coingecko API."""
@@ -97,7 +98,11 @@ def display_list(args):
     elif args.id_less:
         display_id_less()
     elif args.vs_list:
-        display_vs_currencies() 
+        display_vs_currencies()
+        
+def panic(msg):
+    print(f"error: {msg}", file=sys.stderr)
+    sys.exit(-1)
     
 def get_simple_price(id,vs):
     """Gets a basic pair price from the API."""
@@ -141,14 +146,14 @@ def parser_main():
     parser.add_argument("-V","--version", action="version", version='%(prog)s 2.5')
     # List sub-command parser
     subparsers = parser.add_subparsers(help="{subcommand}[-h] shows all the options")
-    parser_convert = subparsers.add_parser('convert',help='convert subcommand {C}[id][vs_currency]([--amount][--switch])', aliases=['c','C','co', 'conv'])
-    parser_list = subparsers.add_parser('list', help='displays list of convertable coins {L}[--argument]',aliases=['l','ls','L','lst'])
+    parser_convert = subparsers.add_parser('convert',help='{C}[id][vs_currency]([--amount][--switch]) - example: ./cgk.py C monero btc 10', aliases=['C'])
+    parser_list = subparsers.add_parser('list', help='displays list of convertable coins {L}[--argument]',aliases=['L'])
             
-    parser_convert.add_argument("id", nargs='?',
+    parser_convert.add_argument("id",
                     help="add an id of an asset to convert")
-    parser_convert.add_argument("vs_currency", nargs='?',
+    parser_convert.add_argument("vs_currency",
                     help="add a symbol of a currency to convert to")
-    parser_convert.add_argument("amount", type=float, nargs='?',default=1,
+    parser_convert.add_argument("amount", type=float, default=1,
                     help="price multiplier (default = 1)")
     parser_convert.add_argument("-s", "--switch",
                     action="store_true",
@@ -167,8 +172,20 @@ def parser_main():
                     
     parser_list.set_defaults(func=display_list)
     args = parser.parse_args()
-    args.func(args)
-
+    
+    
+    
+    try:
+        args.func(args)
+    except AttributeError as e:
+        msg = f"{e}.\n{Style.BRIGHT}Please run: {Fore.YELLOW}./cgk.py --help{Style.RESET_ALL}"
+        panic(msg)
+            
+        
+        
+        
+        
+        
 #    try:
 #        if args.id and args.vs_currency:
 #            id = args.id
