@@ -22,33 +22,6 @@ def get_pycoingecko_symbols():
     response_list = r.json()
     return response_list
 
-def get_simple_price(id,vs):
-    """Gets a basic pair price from the API."""
-    url = \
-        f"https://api.coingecko.com/api/v3/simple/price?ids={id}&vs_currencies={vs}"
-    r = requests.get(url)
-    response_dict = r.json()
-    price = response_dict[f"{id}"][f"{vs}"]
-    return price
-
-def calc_x_price(id,vs,n,switch):
-    """Calculates the price based on pair and amount."""
-    price = get_simple_price(id,vs)
-    if switch == True:
-        x_price=1/price*n
-    else:
-        x_price = price * n
-    return x_price
-
-def display_result(id,vs,amount,x_price,switch):
-    """Main Function printing the price of chosen crypto and amount."""
-    if switch == True:
-        msg = f"\n{amount} {vs}  =  {x_price} {id}\n"
-    else:
-        msg = f"\n{amount} {id}  = {x_price} {vs}\n"
-    print(Fore.CYAN + Style.BRIGHT + msg)
-
-
 def display_id_list():
     """Downloads long list of IDs and prints them as a table."""
     response_dicts = get_pycoingecko_ids()
@@ -117,6 +90,37 @@ def get_sorted_array(lst,columns=3):
     rows = int(len(lst)/columns)
     arr = np.array(lst).reshape(rows,columns)
     return arr
+    
+def get_simple_price(id,vs):
+    """Gets a basic pair price from the API."""
+    url = \
+        f"https://api.coingecko.com/api/v3/simple/price?ids={id}&vs_currencies={vs}"
+    r = requests.get(url)
+    response_dict = r.json()
+    price = response_dict[f"{id}"][f"{vs}"]
+    return price
+
+def calc_x_price(id,vs,n,switch):
+    """Calculates the price based on pair and amount."""
+    price = get_simple_price(id,vs)
+    if switch == True:
+        x_price=1/price*n
+    else:
+        x_price = price * n
+    return x_price
+
+def display_result(args):
+    """Main Function printing the price of chosen crypto and amount."""
+    id = args.id
+    vs = args.vs_currency
+    amount = args.amount
+    switch = args.switch
+    x_price = calc_x_price(id,vs,amount,switch)
+    if switch == True:
+        msg = f"\n{amount} {vs}  =  {x_price} {id}\n"
+    else:
+        msg = f"\n{amount} {id}  = {x_price} {vs}\n"
+    print(Fore.CYAN + Style.BRIGHT + msg)    
 
 def parser_main():
     """Main function initializing ArgumentParser, storing arguments and executing commands."""    
@@ -126,7 +130,7 @@ def parser_main():
             description='''Convert any asset of any amount in terminal.''',
             epilog=Style.DIM + '''Let there be dark!''' + Style.RESET_ALL
         )
-    parser.add_argument("-v","--version", action="version", version='%(prog)s 2.2')
+    parser.add_argument("-v","--version", action="version", version='%(prog)s 2.5')
     # List sub-command parser
     subparsers = parser.add_subparsers(help="{-h} shows all the options")
     parser_convert = subparsers.add_parser('conv',help='convert function')
@@ -138,39 +142,45 @@ def parser_main():
                     help="add a symbol of a currency to convert to")
     parser_convert.add_argument("amount", type=float, nargs='?',default=1,
                     help="price multiplier (default = 1)")
-
     parser_convert.add_argument("-s", "--switch",
                     action="store_true",
                     help="id <--> vs_currency (monero to usd <--> usd to monero)")
+    
+    parser_convert.set_defaults(func=display_result)
+    args = parser.parse_args()
+    args.func(args)
+    
     parser_list.add_argument("-A","--id_all",
                     help="displays all convertable coin ids (over 13000 items!)", action="store_true")
     parser_list.add_argument("-L","--id_less",
                     help="displays a shortened list of convertable coin ids", action="store_true")
     parser_list.add_argument("-V","--vs_list",
-                    help="displays all vs currencies (~60items)", action="store_true")  
-    
+                    help="displays all vs currencies (~60items)", action="store_true")
+                    
+     
+    parser_list.set_defaults()
     args = parser.parse_args()   
 
-    try:
-        if args.id and args.vs_currency:
-            id = args.id
-            vs_currency = args.vs_currency
-            n = args.amount
-            sw = args.switch
-            x_price = calc_x_price(id,vs_currency,n,sw)
-            display_result(id,vs_currency,n,x_price,sw)
-    except AttributeError: 
-        pass          
+#    try:
+#        if args.id and args.vs_currency:
+#            id = args.id
+#            vs_currency = args.vs_currency
+#            n = args.amount
+#            sw = args.switch
+#            x_price = calc_x_price(id,vs_currency,n,sw)
+#            display_result(id,vs_currency,n,x_price,sw)
+#    except AttributeError: 
+#        pass          
 
-    try:
-        if args.id_all:
-            display_id_list()
-        elif args.id_less:
-            display_id_less()
-        elif args.vs_list:
-            display_vs_currencies()        
-    except AttributeError:
-        pass 
+#    try:
+#        if args.id_all:
+#            display_id_list()
+#        elif args.id_less:
+#            display_id_less()
+#        elif args.vs_list:
+#            display_vs_currencies()        
+#    except AttributeError:
+#        pass 
     
 
 if __name__ == '__main__':
