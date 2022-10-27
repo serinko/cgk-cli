@@ -91,6 +91,14 @@ def get_sorted_array(lst,columns=3):
     arr = np.array(lst).reshape(rows,columns)
     return arr
     
+def display_list(args):
+    if args.id_all:
+        display_id_list()
+    elif args.id_less:
+        display_id_less()
+    elif args.vs_list:
+        display_vs_currencies() 
+    
 def get_simple_price(id,vs):
     """Gets a basic pair price from the API."""
     url = \
@@ -132,9 +140,9 @@ def parser_main():
         )
     parser.add_argument("-v","--version", action="version", version='%(prog)s 2.5')
     # List sub-command parser
-    subparsers = parser.add_subparsers(help="{-h} shows all the options")
-    parser_convert = subparsers.add_parser('conv',help='convert function')
-    parser_list = subparsers.add_parser('list', help='displays list of convertable coins')
+    subparsers = parser.add_subparsers(help="{subcommand}[-h] shows all the options")
+    parser_convert = subparsers.add_parser('convert',help='convert subcommand {C}[id][vs_currency]([--amount][--switch])', aliases=['c','C','co', 'conv'])
+    parser_list = subparsers.add_parser('list', help='displays list of convertable coins {L}[--argument]',aliases=['l','ls','L','lst'])
             
     parser_convert.add_argument("id", nargs='?',
                     help="add an id of an asset to convert")
@@ -144,11 +152,11 @@ def parser_main():
                     help="price multiplier (default = 1)")
     parser_convert.add_argument("-s", "--switch",
                     action="store_true",
-                    help="id <--> vs_currency (monero to usd <--> usd to monero)")
+                    help="id <--> vs_currency (monero to usd --> usd to monero)")
     
     parser_convert.set_defaults(func=display_result)
-    args = parser.parse_args()
-    args.func(args)
+#    args = parser.parse_args()
+#    args.func(args)
     
     parser_list.add_argument("-A","--id_all",
                     help="displays all convertable coin ids (over 13000 items!)", action="store_true")
@@ -157,9 +165,9 @@ def parser_main():
     parser_list.add_argument("-V","--vs_list",
                     help="displays all vs currencies (~60items)", action="store_true")
                     
-     
-    parser_list.set_defaults()
-    args = parser.parse_args()   
+    parser_list.set_defaults(func=display_list)
+    args = parser.parse_args()
+    args.func(args)
 
 #    try:
 #        if args.id and args.vs_currency:
