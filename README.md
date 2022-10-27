@@ -41,7 +41,7 @@ Make executable:
 
 * *Convert*:
     - Need to know an asset ["id"](https://api.coingecko.com/api/v3/coins/list) and [vs_currency](https://api.coingecko.com/api/v3/simple/supported_vs_currencies). Amount default is set to = 1.
-    - Run `./cgk.py C [id] [vs_currency>] ([amount] [--switch])`
+    - Run `./cgk.py C [id] [vs_currency] ([amount] [--switch])`
     - Help `./cgk.py C -h`
     - argument `-s` or `--switch` in the end swaps the direction of conversion (monero to btc --> btc to monero)
 
