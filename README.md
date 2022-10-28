@@ -33,7 +33,14 @@ Make executable:
 
 `chmod +x cgk.py`
 
+Make accessible across the environment (exchange <content> for proper ath to your cgk.py drectory):
+`export PATH=/<home>/<user>/serinko/cgk_cmd:$PATH`
+
+Restart your terminal or run (depends on your shell) `source ~/.bashrc` or `source ~/.zshrc` to reload the $PATH.
+
 ### Usage
+
+The commands in this chapter are ran from a given directory, in case you exported the path in previous step, the prefix `./` is not needed and the commands can be ran from anywhere. For example `cgk.py --help`.
 
 * Print help:
 
