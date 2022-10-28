@@ -3,7 +3,7 @@ Python tools for Coingecko API
 
 ## ckg.py
 A simple commandline app to get actual price of any coin on Coingecko and its multiples, using Coingecko API.
-    - *--version: 2.0 - modified with argparse, 2.1 - sorted into subcommands, 2.2 - added colorama.*
+    - *--version: 2.0 - modified with argparse, 2.1 - sorted into subcommands, 2.2 - added colorama, 2.3 - fixed errors, 2.4 - made executable, 2.5 - added aliases (C,L)*
 
 **Install**
 
@@ -16,6 +16,17 @@ Install required modules:
 `cd cgk_cmd`
 
 `pip3 install requirements.txt`
+
+* In case the requirements installation does not work, install these modules:
+
+| Module | Installation |
+| --- | --- |
+| sys | `pip3 install sys` |
+| requests | `pip3 install requests` |
+| tabulate | `pip3 install tabulate` |
+| numpy | `pip3 install numpy` |
+| argparse | `pip3 install argparse` |
+| colorama | `pip3 install colorama` |
 
 Make executable:
 
