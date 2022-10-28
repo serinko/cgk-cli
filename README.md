@@ -38,7 +38,7 @@ Make executable:
 
 `./cgk.py --help`
 
-*SubCommands*
+SubCommands
 
 * *Convert [C]*:
     - Need to know an asset ["id"](https://api.coingecko.com/api/v3/coins/list) and [vs_currency](https://api.coingecko.com/api/v3/simple/supported_vs_currencies). Amount default is set to = 1.
