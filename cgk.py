@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-"""Simple commandline tool to get actual price of any coin on Coingecko and its multiples, modified with argparse"""
+"""Simple commandline tool to get a price of any coin on Coingecko and its multiples"""
 
 import requests
 from tabulate import tabulate
@@ -93,6 +93,7 @@ def get_sorted_array(lst,columns=3):
     return arr
     
 def display_list(args):
+    """Function called by L subcommand in parser_main"""
     if args.id_all:
         display_id_list()
     elif args.id_less:
@@ -133,7 +134,7 @@ def display_result(args):
     if switch == True:
         msg = f"\n{amount} {vs}  =  {x_price} {id}\n"
     else:
-        msg = f"\n{amount} {id}  = {x_price} {vs}\n"
+        msg = f"\n{amount} {id}  =  {x_price} {vs}\n"
     print(Fore.CYAN + Style.BRIGHT + msg)    
 
 def parser_main():
