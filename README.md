@@ -34,6 +34,7 @@ Make executable:
 `chmod +x cgk.py`
 
 Make accessible across the environment (exchange <content> for proper ath to your cgk.py drectory):
+
 `export PATH=/<home>/<user>/serinko/cgk_cmd:$PATH`
 
 Restart your terminal or run (depends on your shell) `source ~/.bashrc` or `source ~/.zshrc` to reload the $PATH.
