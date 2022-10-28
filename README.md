@@ -1,12 +1,12 @@
 # cgk_cmd
-Python tools for Coingecko API
+***Python tools for Coingecko API***
 
 ## ckg.py
 A simple commandline app to get actual price of any coin on Coingecko and its multiples, using Coingecko API.
 
 - *--version: 2.0 - modified with argparse, 2.1 - sorted into subcommands, 2.2 - added colorama, 2.3 - fixed errors, 2.4 - made executable, 2.5 - added aliases (C,L)*
 
-**Install**
+### Install
 
 Open terminal in desired directory and download the repository:
 
@@ -33,13 +33,13 @@ Make executable:
 
 `chmod +x cgk.py`
 
-**Usage**
+### Usage
 
 * Print help:
 
 `./cgk.py --help`
 
-SubCommands
+**SubCommands**
 
 * *Convert [C]*:
     - Need to know an asset ["id"](https://api.coingecko.com/api/v3/coins/list) and [vs_currency](https://api.coingecko.com/api/v3/simple/supported_vs_currencies). Amount default is set to = 1.
@@ -50,7 +50,7 @@ SubCommands
 * *List [L]*:
     - To display all coin ids or vs_currency symbols, run `./cgk.py L -h`
     
-Examples:
+**Examples:**
 
 * How much Bitcoin is 100 Monero?
 `./cgk.py C monero btc 100`
