@@ -93,7 +93,7 @@ def get_sorted_array(lst,columns=3):
     return arr
     
 def display_list(args):
-    """Function called by L subcommand in parser_main"""
+    """Function called L subcommand in parser_main"""
     if args.id_all:
         display_id_list()
     elif args.id_less:
