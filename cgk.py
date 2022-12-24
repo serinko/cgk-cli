@@ -175,7 +175,7 @@ def parser_main():
     try:
         args.func(args)
     except AttributeError as e:
-        msg = f"{e}.\n{Style.BRIGHT}Please run: {Fore.YELLOW}./cgk.py --help{Style.RESET_ALL}"
+        msg = f"{e}.\n{Style.BRIGHT}Please run: {Fore.YELLOW}cgk --help{Style.RESET_ALL}"
         panic(msg)
     
 
