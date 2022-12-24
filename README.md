@@ -6,7 +6,7 @@
 
 A simple commandline app to get actual price of any coin on Coingecko and calculate its multiples, using Coingecko API.
 
-- *--version: 2.0 - modified with argparse, 2.1 - sorted into subcommands, 2.2 - added colorama, 2.3 - fixed errors, 2.4 - made executable, 2.5 - added aliases (C,L)*
+*--version: 2.0 - modified with argparse, 2.1 - sorted into subcommands, 2.2 - added colorama, 2.3 - fixed errors, 2.4 - made executable, 2.5 - added aliases (C,L)*
 
 ### Install
 
@@ -42,11 +42,7 @@ Make executable:
 
 Create alias - add into your ~/.bashrc (or ~/.zshrc in case your native shell is zsh) a line:
 
-<<<<<<< HEAD
 `alias cgk=~/src/cgk_cmd/cgk.py`
-=======
-`export PATH=/<home>/<user>/<your_directory>/cgk_cmd:$PATH`
->>>>>>> 0256b71 (typo edit)
 
 Restart your terminal or run `source ~/.bashrc` (or `source ~/.zshrc` in case of zsh terminal) to reload the alias.
 
