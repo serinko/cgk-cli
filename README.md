@@ -42,7 +42,11 @@ Make executable:
 
 Create alias - add into your ~/.bashrc (or ~/.zshrc in case your native shell is zsh) a line:
 
+<<<<<<< HEAD
 `alias cgk=~/src/cgk_cmd/cgk.py`
+=======
+`export PATH=/<home>/<user>/<your_directory>/cgk_cmd:$PATH`
+>>>>>>> 0256b71 (typo edit)
 
 Restart your terminal or run `source ~/.bashrc` (or `source ~/.zshrc` in case of zsh terminal) to reload the alias.
 
