@@ -10,17 +10,22 @@ A simple commandline app to get actual price of any coin on Coingecko and calcul
 
 ### Install
 
-Open terminal in desired directory and download the repository:
-
-`git clone https://github.com/serinko/cgk_cmd`
-
+Terminal:
+```
+mkdir ~/src
+cd ~/src
+git clone https://github.com/serinko/cgk_cmd
+```
 Install required modules:
 
-`cd cgk_cmd`
+```
+sudo apt-get install python3
+sudo apt-get install python3-pip python-dev
+cd ~/src/cgk_cmd
+pip3 install requirements.txt
+```
 
-`pip3 install requirements.txt`
-
-* In case the requirements installation does not work, install these modules:
+In case the requirements installation does not work, install these modules:
 
 | Module | Installation |
 | --- | --- |
@@ -35,39 +40,65 @@ Make executable:
 
 `chmod +x cgk.py`
 
-Make accessible across the environment (exchange <content> for proper ath to your cgk.py drectory):
+Create alias - add into your ~/.bashrc (or ~/.zshrc in case your native shell is zsh) a line:
 
-`export PATH=/<home>/<user>/cgk_cmd:$PATH`
+`alias cgk=~/src/cgk_cmd/cgk.py`
 
-Restart your terminal or run (depends on your shell) `source ~/.bashrc` or `source ~/.zshrc` to reload the $PATH.
+Restart your terminal or run `source ~/.bashrc` (or `source ~/.zshrc` in case of zsh terminal) to reload the alias.
 
 ### Usage
 
-The commands in this chapter are ran from a given directory, in case you exported the path in previous step, the prefix `./` is not needed and the commands can be ran from anywhere. For example `cgk.py --help`.
+Print help:
 
-* Print help:
-
-`./cgk.py --help`
+`cgk --help` or `cgk -h`
 
 **SubCommands**
 
-* *Convert [C]*:
-    - Need to know an asset ["id"](https://api.coingecko.com/api/v3/coins/list) and [vs_currency](https://api.coingecko.com/api/v3/simple/supported_vs_currencies). Amount default is set to = 1.
-    - Run `./cgk.py C [id] [vs_currency] ([amount] [--switch])`
-    - Help `./cgk.py C -h`
-    - argument `-s` or `--switch` in the end swaps the direction of conversion (monero to btc --> btc to monero)
+*Convert [C]*:
 
-* *List [L]*:
-    - To display all coin ids or vs_currency symbols, run `./cgk.py L -h`
+help: `cgk C --help`
+
+`cgk C [id] [vs_currency] ([amount] [--switch])`
+
+* `[id]` and `[vs_currency]` are positional (required) arguments
+    * To get an asset *id* or *vs_currency* symbols run `cgk L --help` or visit the coingecko documentation page:
+        - ["id"](https://api.coingecko.com/api/v3/coins/list)
+        - [vs_currency](https://api.coingecko.com/api/v3/simple/supported_vs_currencies)
+* `[amount]` is a positional argument - takes arbitrary float value. Default value = 1
+* `[--switch]` (or `[-s]`) is an optional argument. Using it switches the direction of the conversion (monero to btc --> btc to monero)
+
+*List [L]*:
+
+Run `cgk L --help` to see how to display all coingecko *id* and *vs_sybols* needed for the *convert | C* subcommand
     
-**Examples:**
+**Examples of cgk usage**
 
-* How much Bitcoin is 100 Monero?
-`./cgk.py C monero btc 100`
-* How much Monero is 100 Bitcoin?
-`./cgk.py C monero btc 100 -s`
-* What vs_currencies can be used:
-`./cgk.py L --vs_list` or shorter `./cgk.py L -v`.
+How much Bitcoin is 100 Monero?
+
+`cgk C monero btc 100`
+
+How much Monero is 100 Bitcoin?
+
+`cgk C monero btc 100 --switch` or `cgk C monero btc 100 -s`
+
+How much is ethereum price now? (amount default = 1)
+```
+cgk C ethereum usd
+cgk C ethereum eur
+```
+
+How much ethereum is $500?
+
+`cgk ethereum usd 500 --switch`
+
+What `[vs_currency]` symbols can be used in this program?
+
+`cgk L --vs_list` or `cgk L -v`
+
+What `[id]` symbols can be used?
+
+`cgk L --id_all` or `cgk L -a` (Displays over 13000 items!)
+`cgk L --id_less` or `cgk L -l` (for a shorter list of *id* items) 
 
 
 ## cgk_conv.py
