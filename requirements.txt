@@ -2,5 +2,4 @@ requests
 tabulate
 numpy
 argparse
-sys
 colorama

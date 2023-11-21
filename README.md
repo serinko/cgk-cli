@@ -1,27 +1,31 @@
-# cgk_cmd
-
-***Python tools for Coingecko API***
+# Python cmd tool for Coingecko API
 
 ## ckg.py
 
-A simple commandline app to get actual price of any coin on Coingecko and calculate its multiples, using Coingecko API.
+A simple command-line app to get actual price of any coin on Coingecko and calculate its multiples, using Coingecko API.
 
-*--version: 2.0 - modified with argparse, 2.1 - sorted into subcommands, 2.2 - added colorama, 2.3 - fixed errors, 2.4 - made executable, 2.5 - added aliases (C,L)*
+**Version updates** 
+
+- 1.0.0 - crypto converting cmd app works
+- 0.1.4 - added aliases (C,L)
+- 0.1.3 - made executable
+- 0.1.2 - fixed errors
+- 0.1.1 - added colorama
+- 0.1.0 - sorted into sub-commands
+- 0.0.10 - modified with argparse,, 2.2 - added colorama, , , 
 
 ### Install
 
 Terminal:
-```
-mkdir ~/src
-cd ~/src
+```sh
 git clone https://github.com/serinko/cgk_cmd
 ```
 Install required modules:
 
-```
+```sh
 sudo apt-get install python3
 sudo apt-get install python3-pip python-dev
-cd ~/src/cgk_cmd
+cd cgk_cmd
 pip3 install requirements.txt
 ```
 
@@ -29,7 +33,6 @@ In case the requirements installation does not work, install these modules:
 
 | Module | Installation |
 | --- | --- |
-| sys | `pip3 install sys` |
 | requests | `pip3 install requests` |
 | tabulate | `pip3 install tabulate` |
 | numpy | `pip3 install numpy` |
@@ -38,13 +41,22 @@ In case the requirements installation does not work, install these modules:
 
 Make executable:
 
-`chmod +x cgk.py`
+```sh
+chmod +x cgk.py
+```
 
-Create alias - add into your ~/.bashrc (or ~/.zshrc in case your native shell is zsh) a line:
+Create alias - add the alias to your `~/.bashrc` (or `~/.zshrc` in case your native shell is zsh) terminal config:
 
-`alias cgk=~/src/cgk_cmd/cgk.py`
+```sh
+alias cgk=~/<path>/cgk_cmd/cgk.py
+```
 
-Restart your terminal or run `source ~/.bashrc` (or `source ~/.zshrc` in case of zsh terminal) to reload the alias.
+To reload the alias restart your terminal or run:
+```sh
+source ~/.bashrc
+# in case of zsh terminal
+source ~/.zshrc
+```
 
 ### Usage
 
@@ -52,7 +64,7 @@ Print help:
 
 `cgk --help` or `cgk -h`
 
-**SubCommands**
+**Commands**
 
 *Convert [C]*:
 
@@ -100,6 +112,8 @@ What `[id]` symbols can be used?
 `cgk L --id_all` or `cgk L -a` (Displays over 13000 items!)
 `cgk L --id_less` or `cgk L -l` (for a shorter list of *id* items) 
 
+
+---
 
 ## cgk_conv.py
 

@@ -145,7 +145,7 @@ def parser_main():
             description='''Convert any asset of any amount in terminal.''',
             epilog=Style.DIM + '''Let there be dark!''' + Style.RESET_ALL
         )
-    parser.add_argument("-V","--version", action="version", version='%(prog)s 2.5')
+    parser.add_argument("-V","--version", action="version", version='%(prog)s 1.0.0')
     # Sub-command parsers
     subparsers = parser.add_subparsers(help="{subcommand}[-h] shows all the options")
     parser_convert = subparsers.add_parser('convert',help='{C}[id][vs_currency]([--amount][--switch]) - example: ./cgk.py C monero btc 10', aliases=['C'])
