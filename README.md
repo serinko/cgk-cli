@@ -11,7 +11,7 @@ A simple command-line app to get actual price of any coin on Coingecko and calcu
 - `0.1.3` - made executable
 - `0.1.2` - fixed errors
 - `0.1.1` - added colorama
-- `0.1.`0 - sorted into sub-commands
+- `0.1.0` - sorted into sub-commands
 - `0.0.10` - modified with argparse
 
 ### Install
