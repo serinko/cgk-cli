@@ -6,13 +6,13 @@ A simple command-line app to get actual price of any coin on Coingecko and calcu
 
 **Version updates** 
 
-- 1.0.0 - crypto converting cmd app works
-- 0.1.4 - added aliases (C,L)
-- 0.1.3 - made executable
-- 0.1.2 - fixed errors
-- 0.1.1 - added colorama
-- 0.1.0 - sorted into sub-commands
-- 0.0.10 - modified with argparse,, 2.2 - added colorama, , , 
+- `1.0.0` - crypto converting cmd app works
+- `0.1.4` - added aliases (C,L)
+- `0.1.3` - made executable
+- `0.1.2` - fixed errors
+- `0.1.1` - added colorama
+- `0.1.`0 - sorted into sub-commands
+- `0.0.10` - modified with argparse
 
 ### Install
 
@@ -25,13 +25,8 @@ Install required modules:
 ```sh
 sudo apt-get install python3
 sudo apt-get install python3-pip python-dev
-<<<<<<< HEAD
 cd cgk_cmd
 pip3 install requirements.txt
-=======
-cd ~/src/cgk_cmd
-pip3 install -r requirements.txt
->>>>>>> 0d89f5fdd91cf97d6c3bc28192fab23ceb6c710c
 ```
 
 In case the requirements installation does not work, install these modules:
