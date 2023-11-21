@@ -26,7 +26,7 @@ Install required modules:
 sudo apt-get install python3
 sudo apt-get install python3-pip python-dev
 cd cgk_cmd
-pip3 install requirements.txt
+pip3 install -r requirements.txt
 ```
 
 In case the requirements installation does not work, install these modules:
