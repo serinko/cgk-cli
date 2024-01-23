@@ -1,6 +1,6 @@
 #TODO
 #- add error messages
-
+#- add -t/--time [yymmddhhmm, default=now] arg to convert command (
 #!/usr/bin/python3
 
 
