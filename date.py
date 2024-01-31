@@ -28,10 +28,10 @@ class CgkDate:
 
     def time_from(self):
         """Define from which date"""
-        from_date = args.input_date
-        #ts = datetime.timestamp(now)
-        timestamp = from_date.replace.timestamp()
-        return timestamp
+        #from_date = args.input_date
+        from_date = "2024/1/10"
+        timestamp = time.mktime(datetime.strptime(from_date, "%Y/%m/%d").timetuple())
+        print(timestamp)
     
     def unix_time_to(self):
         """Get current unix time"""
