@@ -19,6 +19,11 @@ class CgkDate:
         # get price for a specific date
         one_date = f"https://api.coingecko.com/api/v3/coins/{id}/history?date={date}&localization=false"
         r = requests.get(one_date)
-        #one_date = self.cg.get_coin_history_by_id(id={ID},date={DATE}, localization='false')
+
+    def get_unix_time_now(self):
+        """Get current date and time"""
+        date_time = datetime.now()
+        unix_time = date_time.strftime('%Y-%m-%d %H:%M:%S')
+        return unix_time
     
   
