@@ -26,11 +26,6 @@ class CgkDate:
         now = datetime.now()
         return now
 
-    def stripped_unix_time(self):
-        """Stripped time for time_from module"""
-        date = self.get_unix_time_now()
-        return date
-
     def time_from(self):
         """Define from which date"""
         from_date = args.input_date
