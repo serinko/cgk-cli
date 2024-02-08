@@ -31,15 +31,12 @@ import pandas as pd
 class Portfolio():
 
     def __init__(self):
-        self.date = CkgDate()
-        self.cgk-cli = CoingeckoCLI()
+        self.date = CgkDate()
+        self.cgk_cli = CoingeckoCLI()
 
     def arg_parser(self,args):
         init = args.init
         portfolio_id = args.id
-
-    def initialize_portfolio(self, args):
-
 
 
     def create_data_dir(self,path):
@@ -49,13 +46,11 @@ class Portfolio():
                 "ls ~/.config/cgk-cli/ || echo 'Creating directory ~/.config/cgk-cli/portfolios . . . ' | mkdir -p ~/.config/cgk-cli/portfolios | echo 'Success!'"
                 )
         os.system(
-                f"
-                if [[test -d {path} == true ]]; then
-                    echo '{exist}`
-                else
-                    mkdir -p {path} && echo 'Portfolio data storage is located at {path}'
-                fi
-                "
+                f"if [[test -d {path} == true ]]; then\
+                    echo '{exist}`\
+                else\
+                    mkdir -p {path} && echo 'Portfolio data storage is located at {path}'\
+                fi"
                 )
 
 
