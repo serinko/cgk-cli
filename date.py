@@ -38,7 +38,4 @@ class CgkDate:
         r = requests.get(asset_data_range)
         return asset_data_range
     
-if __name__ == '__main__':
-    cgkdate = CgkDate()
-    cgkdate.time_from()
   
