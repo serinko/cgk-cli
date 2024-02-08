@@ -13,12 +13,14 @@ import argparse
 from colorama import Fore, Back, Style
 import sys
 from portfolio import Portfolio
+#from date import CgkDate
 
 class CoingeckoConvertor:
     """Simple commandline tool to get a price of any coin on Coingecko and its multiples"""
 
     def __init__(self):
         self.portfolio = Portfolio()
+        #self.date = CgkDate()
 
     def get_pycoingecko_ids(self):
         """Gets a list of all coin ids from coingecko API."""
@@ -138,12 +140,27 @@ class CoingeckoConvertor:
         vs = args.vs_currency
         amount = args.amount
         switch = args.switch
+        #date = args.date
+
+        #if date == True:
+         #   display_asset_price_history(self,args)
+        #else:    
         x_price = self.calc_x_price(id,vs,amount,switch)
         if switch == True:
             msg = f"\n{amount} {vs}  =  {x_price} {id}\n"
         else:
             msg = f"\n{amount} {id}  =  {x_price} {vs}\n"
         print(Fore.CYAN + Style.BRIGHT + msg)
+
+    #def display_asset_price_history(self,args):
+        #"""Display given asset price history within range"""
+        #id = args.id
+        #date = args.date
+
+        #print(f"\n{date} {id}/{vs} {price})
+    
+            
+
 
     def parser_main(self):
         """Main function initializing ArgumentParser, storing arguments and executing commands."""
@@ -169,6 +186,10 @@ class CoingeckoConvertor:
                         action="store_true",
                         help="id <--> vs_currency (monero to usd --> usd to monero)")
         parser_convert.set_defaults(func=self.display_result)
+        #parser_convert.add_argument("-d", "--date",
+         #               action="start date for asset price",
+          #              help="format is yyyy/m/dd")
+        #parser_convert.set_defaults(func=self.display_result)
         # List - arguments
         parser_list.add_argument("-a","--id_all",
                         help="displays all convertable coin ids (over 13000 items!)", action="store_true")
