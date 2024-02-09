@@ -39,26 +39,29 @@ class Portfolio():
         portfolio_id = args.id
 
 
-    def create_data_dir(self,path):
-        """Checks and create ~/.config/cgk-cli data storage"""
-        exist = "Portfolio with such ID already exists, please choose another name"
-        os.system(
-                "ls ~/.config/cgk-cli/ || echo 'Creating directory ~/.config/cgk-cli/portfolios . . . ' | mkdir -p ~/.config/cgk-cli/portfolios | echo 'Success!'"
-                )
-        os.system(
-                f"if [[test -d {path} == true ]]; then\
-                    echo '{exist}`\
-                else\
-                    mkdir -p {path} && echo 'Portfolio data storage is located at {path}'\
-                fi"
-                )
-
+    def create_data_dir(self,portfolio_id,path):
+        """Checks and create local data storage"""
+        data_dir_path = "~/.config/cgk-cli/portfolios"
+        dir_exist = f"Portfolio {portfolio_id} already exists, please choose another name."
+        dir_created = f"New porfolio {portfolio_id} was initialised. Data storage is located at {path}."
+        if os.system("test -d {data_dir_path}") == 0:
+            pass
+        else:
+            print(f"Creating directory {data_dir_path} . . . ")
+            os.system(f"mkdir -p {data_dir_path}")
+            print("Success!")
+        if os.system(f"test -d {path}") == 0:
+            Print(dir_exist)
+        else:
+            os.system(f"mkdir -p {path}")
+            print(dir_created)
 
     def create_portfolio(self, args):
         """Creates porftfolio data directory and initial csv file"""
         portfolio_id = args.id
         path = f"~/.config/cgk-cli/portfolios/{portfolio_id}"
-        self.create_data_dir(path)
+        self.create_data_dir(portfolio_id, path)
         os.system(f"ls {path} || mkdir -p {path}")
         df = pd.read_csv("data/portfolio.csv")
+        # add a cli function editing new portfolio
         df.to_csv(f"{path}/{portfolio_id}.csv")

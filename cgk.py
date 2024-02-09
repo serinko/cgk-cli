@@ -67,16 +67,16 @@ class CoingeckoCLI:
             args.func(args)
         except AttributeError as e:
             msg = f"{e}.\n{Style.BRIGHT}Please run: {Fore.YELLOW}cgk --help{Style.RESET_ALL}"
-            self.convert
             self.panic(msg)
         except KeyError as e:
-            msg = f"{e}.\n{Style.BRIGHT}Your 'id' or 'vs_currency' was incorrect. Please run: {Fore.YELLOW}cgk L --help{Style.RESET_ALL}\                  \n In case you are sure that you entered them correctly, Coingecko API is overloaded.\
-                  \n{Fore.BLUE}Please wait a second and try again.{Style.RESET_ALL}"
+            msg = f"{e}.\n{Style.BRIGHT}Your 'id' or 'vs_currency' was incorrect. Please run: {Fore.YELLOW}cgk L --help{Style.RESET_ALL}"\
+            "\nIn case you are sure that you entered them correctly, Coingecko API is overloaded."\
+            f"\n{Fore.BLUE}Please try again in a minute.{Style.RESET_ALL}"
             self.panic(msg)
 
 
 
-    def panic(msg):
+    def panic(self,msg):
         """Error message print"""
         print(f"error: {msg}", file=sys.stderr)
         sys.exit(-1)
