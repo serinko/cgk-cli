@@ -37,6 +37,8 @@ class CoingeckoCLI:
         subparsers = parser.add_subparsers(help="{subcommand}[-h] shows all the options")
         parser_convert = subparsers.add_parser('convert',help='{C}[id][vs_currency]([--amount][--switch]) - example: ./cgk.py C monero btc 10', aliases=['C'])
         parser_list = subparsers.add_parser('list', help='displays list of convertable coins {L}[--argument]',aliases=['L'])
+        parser_portfolio = subparsers.add_parser('portfolio',help='Manage your crypto portfolios locally',aliases=['P'])
+
         # Convert - arguments
         parser_convert.add_argument("id",
                         help="add an id of an asset to convert")
@@ -52,6 +54,7 @@ class CoingeckoCLI:
          #               action="start date for asset price",
           #              help="format is yyyy/m/dd")
         #parser_convert.set_defaults(func=self.display_result)
+
         # List - arguments
         parser_list.add_argument("-a","--id_all",
                         help="displays all convertable coin ids (over 13000 items!)", action="store_true")
@@ -60,6 +63,11 @@ class CoingeckoCLI:
         parser_list.add_argument("-v","--vs_list",
                         help="displays all vs currencies (~60items)", action="store_true")
         parser_list.set_defaults(func=self.convert.display_list)
+
+        # Portfolio arguments
+        parser_portfolio.add_argument("-c","--create",help="create a new portfolio", action="store_true")
+        parser_portfolio.add_argument("-i","--id",help="portfolio ID (name)", type=str)
+        parser_portfolio.set_defaults(func=self.portfolio.arg_parser)
 
         args = parser.parse_args()
 

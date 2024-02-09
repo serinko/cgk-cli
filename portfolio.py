@@ -35,23 +35,25 @@ class Portfolio():
         self.cgk_cli = CoingeckoCLI()
 
     def arg_parser(self,args):
-        init = args.init
-        portfolio_id = args.id
+        if args.create:
+            self.create_portfolio(args)
+        else:
+            pass
 
 
-    def create_data_dir(self,portfolio_id,path):
+    def create_data_dir(self,portfolio_id,data_dir_path,path):
         """Checks and create local data storage"""
-        data_dir_path = "~/.config/cgk-cli/portfolios"
-        dir_exist = f"Portfolio {portfolio_id} already exists, please choose another name."
-        dir_created = f"New porfolio {portfolio_id} was initialised. Data storage is located at {path}."
-        if os.system("test -d {data_dir_path}") == 0:
+        dir_exist = f"Portfolio {portfolio_id} already exists, please choose another name!"
+        dir_created = f"{Style.BRIGHT}New porfolio {portfolio_id} was initialised.\nData storage is located at {Fore.YELLOW}{path}{Style.RESET_ALL}"
+        if os.system(f"test -d {data_dir_path}") == 0:
             pass
         else:
             print(f"Creating directory {data_dir_path} . . . ")
             os.system(f"mkdir -p {data_dir_path}")
             print("Success!")
         if os.system(f"test -d {path}") == 0:
-            Print(dir_exist)
+            print(dir_exist)
+            sys.exit(-1)
         else:
             os.system(f"mkdir -p {path}")
             print(dir_created)
@@ -59,9 +61,12 @@ class Portfolio():
     def create_portfolio(self, args):
         """Creates porftfolio data directory and initial csv file"""
         portfolio_id = args.id
-        path = f"~/.config/cgk-cli/portfolios/{portfolio_id}"
-        self.create_data_dir(portfolio_id, path)
-        os.system(f"ls {path} || mkdir -p {path}")
-        df = pd.read_csv("data/portfolio.csv")
-        # add a cli function editing new portfolio
-        df.to_csv(f"{path}/{portfolio_id}.csv")
+        data_dir_path = "~/.config/cgk-cli/portfolios/"
+        path = f"{data_dir_path}{portfolio_id}"
+        if portfolio_id:
+            self.create_data_dir(portfolio_id, data_dir_path, path)
+            df = pd.read_csv("data/portfolio.csv")
+            # add a cli function editing new portfolio
+            df.to_csv(f"{path}/{portfolio_id}.csv")
+        else:
+            print("Missing ID")
