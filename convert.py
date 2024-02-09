@@ -4,8 +4,11 @@ import numpy as np
 import argparse
 from colorama import Fore, Back, Style
 import sys
+import os
+import pandas as pd
 from portfolio import Portfolio
 from date import CgkDate
+
 
 class Convert:
 
@@ -26,14 +29,17 @@ class Convert:
         response_list = r.json()
         return response_list
 
-    def display_id_list(self):
+
+    def save_id_list(self):
         """Downloads long list of IDs and prints them as a table."""
         response_dicts = self.get_pycoingecko_ids()
         lst = []
         for dict in response_dicts:
             lst.append(dict["id"])
         array = self.get_sorted_array(lst)
-        print(tabulate(array))
+        df = pd.DataFrame(lst)
+        df.to_csv("cgk_ids.csv", index=False)
+        return len(lst)
 
     def display_id_less(self):
         """A users custom choice of id currencies."""
@@ -95,7 +101,9 @@ class Convert:
     def display_list(self, args):
         """Function called L subcommand in parser_main"""
         if args.id_all:
-            self.display_id_list()
+            lenght = self.save_id_list()
+            os.system("less ./cgk_ids.csv")
+            print(f"All {lenght} coingecko IDs were saved as cgk_ids.csv.")
         elif args.id_less:
             self.display_id_less()
         elif args.vs_list:

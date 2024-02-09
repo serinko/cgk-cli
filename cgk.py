@@ -1,11 +1,5 @@
 #!/usr/bin/python3
 
-#TODO
-#- add error messages
-#- add -t/--time [yymmddhhmm, default=now] arg to convert command
-
-
-
 import requests
 from tabulate import tabulate
 import numpy as np
@@ -66,7 +60,8 @@ class CoingeckoCLI:
 
         # Portfolio arguments
         parser_portfolio.add_argument("-c","--create",help="create a new portfolio", action="store_true")
-        parser_portfolio.add_argument("-i","--id",help="portfolio ID (name)", type=str)
+        parser_portfolio.add_argument("-n","--name",help="portfolio name <NAME>", type=str)
+        parser_portfolio.add_argument("-a","--add_asset",help="add any coingesko listed coin, for help run cgk L --id_all",type=str)
         parser_portfolio.set_defaults(func=self.portfolio.arg_parser)
 
         args = parser.parse_args()
@@ -79,7 +74,7 @@ class CoingeckoCLI:
         except KeyError as e:
             msg = f"{e}.\n{Style.BRIGHT}Your 'id' or 'vs_currency' was incorrect. Please run: {Fore.YELLOW}cgk L --help{Style.RESET_ALL}"\
             "\nIn case you are sure that you entered them correctly, Coingecko API is overloaded."\
-            f"\n{Fore.BLUE}Please try again in a minute.{Style.RESET_ALL}"
+            f"\n{Fore.BLUE}Please try again in a minute or cvhange your IP.{Style.RESET_ALL}"
             self.panic(msg)
 
 

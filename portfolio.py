@@ -37,14 +37,16 @@ class Portfolio():
     def arg_parser(self,args):
         if args.create:
             self.create_portfolio(args)
+        elif args.add_asset:
+            self.add_asset(args)
         else:
             pass
 
 
-    def create_data_dir(self,portfolio_id,data_dir_path,path):
+    def create_data_dir(self,portfolio_name,data_dir_path,path):
         """Checks and create local data storage"""
         dir_exist = f"Portfolio {portfolio_id} already exists, please choose another name!"
-        dir_created = f"{Style.BRIGHT}New porfolio {portfolio_id} was initialised.\nData storage is located at {Fore.YELLOW}{path}{Style.RESET_ALL}"
+        dir_created = f"{Style.BRIGHT}New porfolio {portfolio_name} was initialised.\nData storage is located at {Fore.YELLOW}{path}{Style.RESET_ALL}"
         if os.system(f"test -d {data_dir_path}") == 0:
             pass
         else:
@@ -60,13 +62,37 @@ class Portfolio():
 
     def create_portfolio(self, args):
         """Creates porftfolio data directory and initial csv file"""
-        portfolio_id = args.id
+        portfolio_name = args.name
         data_dir_path = "~/.config/cgk-cli/portfolios/"
-        path = f"{data_dir_path}{portfolio_id}"
-        if portfolio_id:
-            self.create_data_dir(portfolio_id, data_dir_path, path)
+        path = f"{data_dir_path}{portfolio_name}"
+        if portfolio_name:
+            self.create_data_dir(portfolio_name, data_dir_path, path)
             df = pd.read_csv("data/portfolio.csv")
             # add a cli function editing new portfolio
-            df.to_csv(f"{path}/{portfolio_id}.csv")
+            df.to_csv(f"{path}/{portfolio_name}.csv")
         else:
-            print("Missing ID")
+            self.missing_name()
+
+# a few functions here
+# add_asset ID - no need for price, just adds to ther list with 0
+# buy ID - price total or per coin, time, note (later fees)
+# sell ID - price total or per coin, time, note (later fees)
+
+#    def add_asset(self,args):
+#        id = args.add_asset
+#        if args.name:
+#            self.check_asset_id(id)
+#
+#        else:
+#            self.missing_name()
+#
+#    def check_asset_id(self,id):
+#
+#
+    def missing_name(self):
+        print("Missing portfolio --name, please specify with --name <NAME>")
+        sys.exit(-1)
+
+    def missing_id(self):
+        print("Missing asset ID (for example: cgk P --add_asset bitcoin), for more help run: cgk L --id_all.")
+        sys.exit(-1)
