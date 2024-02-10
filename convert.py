@@ -9,11 +9,11 @@ import pandas as pd
 from portfolio import Portfolio
 from date import CgkDate
 
-
 class Convert:
 
     def __init__(self):
         self.date = CgkDate()
+        self.portfolio = Portfolio()
 
     def get_pycoingecko_ids(self):
         """Gets a list of all coin ids from coingecko API."""
@@ -36,9 +36,10 @@ class Convert:
         lst = []
         for dict in response_dicts:
             lst.append(dict["id"])
-        array = self.get_sorted_array(lst)
+        # array = self.get_sorted_array(lst)
         df = pd.DataFrame(lst)
-        df.to_csv("cgk_ids.csv", index=False)
+        self.portfolio.create_data_dir()
+        df.to_csv("~/.config/cgk-cli/cgk_ids.csv", index=False)
         return len(lst)
 
     def display_id_less(self):
@@ -103,7 +104,7 @@ class Convert:
         if args.id_all:
             lenght = self.save_id_list()
             os.system("less ./cgk_ids.csv")
-            print(f"All {lenght} coingecko IDs were saved as cgk_ids.csv.")
+            print(f"All {lenght} coingecko IDs were saved as ~/.config/cgk-cli/cgk_ids.csv.")
         elif args.id_less:
             self.display_id_less()
         elif args.vs_list:
