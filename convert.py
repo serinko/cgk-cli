@@ -13,7 +13,7 @@ from date import CgkDate
 class Convert:
 
     def __init__(self):
-        self.date = CgkDate()
+        self.time = CgkDate()
 
     def get_pycoingecko_ids(self):
         """Gets a list of all coin ids from coingecko API."""
@@ -145,9 +145,12 @@ class Convert:
         #else:
         x_price = self.calc_x_price(id,vs,amount,switch)
         if switch == True:
+            time = f"Time: {self.time.get_unix_time_now()}"
             msg = f"\n{amount} {vs}  =  {x_price} {id}\n"
         else:
+            time = f"Time: {self.time.get_unix_time_now()}"
             msg = f"\n{amount} {id}  =  {x_price} {vs}\n"
+        print(time)
         print(Fore.CYAN + Style.BRIGHT + msg)
 
     #def display_asset_price_history(self,args):
@@ -156,3 +159,4 @@ class Convert:
         #date = args.date
 
         #print(f"\n{date} {id}/{vs} {price})
+
