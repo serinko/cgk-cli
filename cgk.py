@@ -45,7 +45,7 @@ class CoingeckoCLI:
                         help="id <--> vs_currency (monero to usd --> usd to monero)")
         parser_convert.add_argument("-t", "--time",
                         action="store_true",
-                        help="add present unix time for conversion")
+                        help="see price in past, format YYYY-MM-DD")
         parser_convert.set_defaults(func=self.convert.display_result)
         #parser_convert.add_argument("-d", "--date",
          #               action="start date for asset price",

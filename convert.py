@@ -138,25 +138,15 @@ class Convert:
         vs = args.vs_currency
         amount = args.amount
         switch = args.switch
-        #date = args.date
+        date = args.time
 
-        #if date == True:
-         #   display_asset_price_history(self,args)
-        #else:
         x_price = self.calc_x_price(id,vs,amount,switch)
         if switch == True:
-            time = f"Time: {self.time.get_unix_time_now()}"
+            # time: --> somewhere is finction which does if time and if not returns now and if yes returns time and price in the given time
+            time = f"Time:  {date}"
             msg = f"\n{amount} {vs}  =  {x_price} {id}\n"
         else:
             time = f"Time: {self.time.get_unix_time_now()}"
             msg = f"\n{amount} {id}  =  {x_price} {vs}\n"
         print(time)
         print(Fore.CYAN + Style.BRIGHT + msg)
-
-    #def display_asset_price_history(self,args):
-        #"""Display given asset price history within range"""
-        #id = args.id
-        #date = args.date
-
-        #print(f"\n{date} {id}/{vs} {price})
-
