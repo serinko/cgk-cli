@@ -44,13 +44,9 @@ class CoingeckoCLI:
                         action="store_true",
                         help="id <--> vs_currency (monero to usd --> usd to monero)")
         parser_convert.add_argument("-t", "--time",
-                        action="store_true",
-                        help="see price in past, format YYYY-MM-DD")
+                        type=str,
+                        help="see price in past, format DD-MM-YYYY") 
         parser_convert.set_defaults(func=self.convert.display_result)
-        #parser_convert.add_argument("-d", "--date",
-         #               action="start date for asset price",
-          #              help="format is yyyy/m/dd")
-        #parser_convert.set_defaults(func=self.display_result)
 
         # List - arguments
         parser_list.add_argument("-a","--id_all",
