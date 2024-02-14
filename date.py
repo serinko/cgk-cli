@@ -12,12 +12,11 @@ class CgkDate:
 
     def historical_data(self):
         """Historical asset price for a given date"""
-        #date = "30-12-2022"
         data = f"https://api.coingecko.com/api/v3/coins/{id}/history?date={date}&localization=False"
         response = requests.get(data)
         response_dict = response.json()
         current_price = response_dict['market_data']['current_price']
-        price = current_price['usd']
+        price = current_price[vs]
         return price
 
     def get_unix_time_now(self):
