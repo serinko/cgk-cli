@@ -6,14 +6,24 @@ from colorama import Fore, Back, Style
 import sys
 import os
 import pandas as pd
-from portfolio import Portfolio
 from date import CgkDate
 
 class Convert:
 
     def __init__(self):
         self.date = CgkDate()
-        self.portfolio = Portfolio()
+        self.data_dir_path = "~/.config/cgk-cli/portfolios/"
+
+
+    def create_data_dir(self):
+        """Checks and create local data storage"""
+        if os.system(f"test -d {self.data_dir_path}") == 0:
+            pass
+        else:
+            print(f"Creating directory {data_dir_path} . . . ")
+            os.system(f"mkdir -p {data_dir_path}")
+            print("Success!")
+
 
     def get_pycoingecko_ids(self):
         """Gets a list of all coin ids from coingecko API."""
@@ -38,9 +48,9 @@ class Convert:
             lst.append(dict["id"])
         # array = self.get_sorted_array(lst)
         df = pd.DataFrame(lst)
-        self.portfolio.create_data_dir()
+        self.create_data_dir()
         df.to_csv("~/.config/cgk-cli/cgk_ids.csv", index=False)
-        return len(lst)
+        return lst
 
     def display_id_less(self):
         """A users custom choice of id currencies."""
@@ -102,8 +112,8 @@ class Convert:
     def display_list(self, args):
         """Function called L subcommand in parser_main"""
         if args.id_all:
-            lenght = self.save_id_list()
-            os.system("less ./cgk_ids.csv")
+            lenght = len(self.save_id_list())
+            os.system("less ~/.config/cgk-cli/cgk_ids.csv")
             print(f"All {lenght} coingecko IDs were saved as ~/.config/cgk-cli/cgk_ids.csv.")
         elif args.id_less:
             self.display_id_less()
