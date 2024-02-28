@@ -1,6 +1,6 @@
 #TODO
-#- redo into classes for easier object reference
-#- test it as it's own program, copying the logic of convertor
+#- DONE: redo into classes for easier object reference
+#- REDUNDANT, implmenet fully: test it as it's own program, copying the logic of convertor
 #   - test subcommands for P/portfolio command
 #   - init: initialise a new portfolio [--name]
 #   - add: add an asset to your portfolio [--name, --id (asset id)] -> asset is listed with 0 values
@@ -18,6 +18,7 @@ import requests
 from tabulate import tabulate
 import numpy as np
 import argparse
+from tabulate import tabulate
 from colorama import Fore, Back, Style
 import sys
 import os
@@ -33,12 +34,15 @@ class Portfolio():
         self.id_list = self.convert.save_id_list()
         self.data_dir_path = "~/.config/cgk-cli/portfolios/"
         self.create_data_dir = self.convert.create_data_dir()
+        self.underlying_asset = "usd"
 
     def arg_parser(self,args):
         if args.create:
             self.create_portfolio(args)
         elif args.add_asset:
             self.add_asset(args)
+        elif args.buy or args.sell:
+            self.buy_sell(args)
         else:
             pass
 
@@ -78,7 +82,7 @@ class Portfolio():
             pass
         else:
             os.system(f"cp data/asset.csv {file}")
-            print("{id}.csv was created, its storet in {path}")
+            print("{id}.csv was created, its stored in {path}")
 
 
 # a few functions here
@@ -90,7 +94,7 @@ class Portfolio():
         file = f"{self.data_dir_path}{name}/{name}.csv"
         return file
 
-    def buy(self,args):
+    def buy_sell(self,args):
         if name:
             id = args.id
             file = self.get_file(name)
@@ -99,11 +103,8 @@ class Portfolio():
                 if id in df.Asset.values:
                     path = f"{self.dir_path}{name}/coins/{id}.csv"
                     csv = pd.read_csv(path)
-                    #prompts
-                    #price_per_coin
-                    #amount_coins
-                    #total_price
-                    #add to csv
+                    transaction, quantity, price_per_coin, total, fees = self.buy_sel_cli(args)
+                    self.add_transaction(transaction, quantity, price_per_coin, total, fees
                 else:
                     prompt = "f{id} is not added in your portfolio.\ndo you want to add it now? y/n"
                     input(prompt)
@@ -114,8 +115,71 @@ class Portfolio():
         else:
             self.missing_name()
 
-    def sell(self,args):
-        """sell crypto"""
+    def add_transaction
+
+    def buy_sell_cli(self,args):
+        if args.buy:
+            transaction = "buy"
+        else:
+            transaction = "sell"
+        while True:
+            prompt = f"\nChoose an input you want to add - the rest will be calculated:\
+                    \n1. Price per coin & Quantity\
+                    \n2. Total {self.underlying_asset} spent/gained & Quantity\
+                    \n3. Total {self.underlying_asset} spent/gained & Price per coin\
+                    \n(enter 1 or 2 or 3):"
+            choose_input = input(prompt)
+            if choose_input == "1":
+                price_per_coin = input(f"Price per {args.id} in {self.underlying_asset}: ")
+                quantity = input(f"Quantity {args.id} you {transaction}: ")
+                fees = 0
+                # Add fees calculation later
+                total = self.total_calculation(price_per_coin, quantity)
+            elif choose_input == "2":
+                total = input(f"Total {self.underlying_asset} spent/gained: ")
+                quantity = input(f"Quantity {args.id} you {transaction}: ")
+                price_per_coin = self.price_per_coin_calculation(total, quantity)
+            elif choose_input == "3":
+                total = input(f"Total {self.underlying_asset} spent/gained: ")
+                price_per_coin = input(f"Price per {args.id} in {self.underlying_asset}: ")
+                quantity = self.calculate_quantity(total, price_per_coin)
+            else:
+                print(f"Your choice was {choose_input}, that's a non-existing option, try again later")
+                sys.exit(-1)
+            table = [
+                    ("Transaction type", transaction),
+                    (f"Quantity {args.id}", quantity),
+                    ("Price per coin", price_per_coin),
+                    (f"Total {self.underlying_asset}", total),
+                    ("Fees", "this functiion not developed yet")
+                    ]
+            print("This transaction will be added to your portfolio:")
+            print(tabulate(table))
+            agree = input("Do you agree? (y/again/exit): ")
+            if agree == "y" or "Y":
+                return transaction, quantity, price_per_coin, total, fees
+                break
+            elif agree == "again" or "Again" or "AGAIN":
+                pass
+            elif agree == "exit" or "Exit" or "EXIT":
+                sys.exit(-1)
+            else:
+                print(f"Your choice was {agree}, that's a non-existing option, try again later")
+                sys.exit(-1)
+
+
+
+    def total_calculation(self, price_per_coin, quantity):
+        total = float(price_per_coin) * float(quantity)
+        return total
+
+    def price_per_coin_calculation(self, total, quantity):
+        price_per_coin = float(total) / float(quantity)
+        return price_per_coin
+
+    def calculate_quantity(self, total, price_per_coin):
+        quantity = float(total) / float(price_per_coin)
+        return quantity
 
     def add_asset(self,args):
         id = args.add_asset
