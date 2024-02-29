@@ -22,6 +22,7 @@ from tabulate import tabulate
 from colorama import Fore, Back, Style
 import sys
 import os
+import toml
 from date import CgkDate
 import pandas as pd
 from convert import Convert
@@ -34,7 +35,8 @@ class Portfolio():
         self.id_list = self.convert.save_id_list()
         self.data_dir_path = "~/.config/cgk-cli/portfolios/"
         self.create_data_dir = self.convert.create_data_dir()
-        self.underlying_asset = "usd"
+        self.underlying_asset = self.read_underlying_asset()
+        self.config = self.read_config()
 
     def arg_parser(self,args):
         if args.create:
@@ -45,6 +47,25 @@ class Portfolio():
             self.buy_sell(args)
         else:
             pass
+
+    def read_config(self):
+        file = "~/.config/cgk-cli/config.toml"
+        if os.system(f"test -d {self.data_dir_path}") == 0:
+            pass
+        else:
+            self.create_data_dir
+        if os.system(f"test -f {file}" == 0:
+            pass
+        else:
+            os.system(f"cp data/config.toml {file}")
+        with open(path, 'r') as f:
+            config = toml.load(f)
+        return config
+
+    def read_underlying_asset(self):
+       config = self.config
+       underlying_asset = config["underlying_asset"]
+       return underlying_asset
 
 
     def create_portfolio_dir(self,portfolio_name,path):
@@ -103,8 +124,8 @@ class Portfolio():
                 if id in df.Asset.values:
                     path = f"{self.dir_path}{name}/coins/{id}.csv"
                     csv = pd.read_csv(path)
-                    transaction, quantity, price_per_coin, total, fees = self.buy_sel_cli(args)
-                    self.add_transaction(transaction, quantity, price_per_coin, total, fees
+                    transaction, price_per_coin, quantity, total, fees, note = self.buy_sell_cli(args)
+                    self.add_transaction(csv, transaction, price_per_coin, quantity, total, fees, note)
                 else:
                     prompt = "f{id} is not added in your portfolio.\ndo you want to add it now? y/n"
                     input(prompt)
@@ -115,7 +136,9 @@ class Portfolio():
         else:
             self.missing_name()
 
-    def add_transaction
+    def add_transaction(self, csv, transaction, price_per_coin, quantity, total, fees, note):
+
+
 
     def buy_sell_cli(self,args):
         if args.buy:
@@ -127,12 +150,11 @@ class Portfolio():
                     \n1. Price per coin & Quantity\
                     \n2. Total {self.underlying_asset} spent/gained & Quantity\
                     \n3. Total {self.underlying_asset} spent/gained & Price per coin\
-                    \n(enter 1 or 2 or 3):"
+                    \n(enter 1 or 2 or 3): "
             choose_input = input(prompt)
             if choose_input == "1":
                 price_per_coin = input(f"Price per {args.id} in {self.underlying_asset}: ")
                 quantity = input(f"Quantity {args.id} you {transaction}: ")
-                fees = 0
                 # Add fees calculation later
                 total = self.total_calculation(price_per_coin, quantity)
             elif choose_input == "2":
@@ -146,18 +168,23 @@ class Portfolio():
             else:
                 print(f"Your choice was {choose_input}, that's a non-existing option, try again later")
                 sys.exit(-1)
+            fees = input(f"Fees in {self.underlying_asset}: ")
+            note = input("Notes: ")
+            line = "-------------------------"
             table = [
                     ("Transaction type", transaction),
                     (f"Quantity {args.id}", quantity),
                     ("Price per coin", price_per_coin),
                     (f"Total {self.underlying_asset}", total),
-                    ("Fees", "this functiion not developed yet")
+                    ("Fees", fees),
+                    ("Notes", note)
                     ]
+            print(line)
             print("This transaction will be added to your portfolio:")
             print(tabulate(table))
             agree = input("Do you agree? (y/again/exit): ")
             if agree == "y" or "Y":
-                return transaction, quantity, price_per_coin, total, fees
+                return transaction, price_per_coin, quantity, total, fees, note
                 break
             elif agree == "again" or "Again" or "AGAIN":
                 pass
