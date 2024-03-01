@@ -20,8 +20,8 @@ class Convert:
         if os.system(f"test -d {self.data_dir_path}") == 0:
             pass
         else:
-            print(f"Creating directory {data_dir_path} . . . ")
-            os.system(f"mkdir -p {data_dir_path}")
+            print(f"Creating directory {self.data_dir_path} . . . ")
+            os.system(f"mkdir -p {self.data_dir_path}")
             print("Success!")
 
 

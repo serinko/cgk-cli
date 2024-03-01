@@ -49,21 +49,23 @@ class Portfolio():
             pass
 
     def read_config(self):
-        file = "~/.config/cgk-cli/config.toml"
+        home = os.path.expanduser('~')
+        file = f"{home}/.config/cgk-cli/config.toml"
+        # refresh try-expect-error and implement this instead of this hack
         if os.system(f"test -d {self.data_dir_path}") == 0:
             pass
         else:
-            self.create_data_dir
-        if os.system(f"test -f {file}" == 0:
+            self.create_data_dir()
+        if os.system(f"test -f {file}") == 0:
             pass
         else:
             os.system(f"cp data/config.toml {file}")
-        with open(path, 'r') as f:
+        with open(file, 'r') as f:
             config = toml.load(f)
         return config
 
     def read_underlying_asset(self):
-       config = self.config
+       config = self.read_config()
        underlying_asset = config["underlying_asset"]
        return underlying_asset
 
@@ -136,8 +138,7 @@ class Portfolio():
         else:
             self.missing_name()
 
-    def add_transaction(self, csv, transaction, price_per_coin, quantity, total, fees, note):
-
+    #def add_transaction(self, csv, transaction, price_per_coin, quantity, total, fees, note):
 
 
     def buy_sell_cli(self,args):
