@@ -11,9 +11,7 @@ from date import CgkDate
 class Convert:
 
     def __init__(self):
-<<<<<<< HEAD
-        self.time = CgkDate()
-=======
+
         self.date = CgkDate()
         self.data_dir_path = "~/.config/cgk-cli/portfolios/"
 
@@ -27,7 +25,6 @@ class Convert:
             os.system(f"mkdir -p {data_dir_path}")
             print("Success!")
 
->>>>>>> feature/portfolio
 
     def get_pycoingecko_ids(self):
         """Gets a list of all coin ids from coingecko API."""
