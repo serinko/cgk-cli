@@ -43,14 +43,13 @@ class Convert:
     def save_id_list(self):
         """Downloads long list of IDs and prints them as a table."""
         response_dicts = self.get_pycoingecko_ids()
-        lst = []
-        for dict in response_dicts:
-            lst.append(dict["id"])
+        df = pd.DataFrame(response_dicts)
+        ids_list = df['id'].to_list()
         # array = self.get_sorted_array(lst)
-        df = pd.DataFrame(lst)
+        array = pd.Series(ids_list)
         self.create_data_dir()
-        df.to_csv("~/.config/cgk-cli/cgk_ids.csv", index=False)
-        return lst
+        array.to_csv("~/.config/cgk-cli/cgk_ids.csv", index=False)
+        return ids_list
 
     def display_id_less(self):
         """A users custom choice of id currencies."""
