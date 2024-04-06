@@ -7,13 +7,21 @@ import sys
 import os
 import pandas as pd
 from date import CgkDate
+from config import Config
 
 class Convert:
 
     def __init__(self):
         self.date = CgkDate()
         self.data_dir_path = "~/.config/cgk-cli/portfolios/"
+        self.config = Config()
+        self.api_key = self.get_api_key()
+        self.api_demo_string = "x_cg_demo_api_key"
+        self.api_pro_string = "x_cg_pro_api_key"
 
+    def get_api_key(self):
+        api_key = self.config.get_api_key()
+        return api_key
 
     def create_data_dir(self):
         """Checks and create local data storage"""
@@ -27,14 +35,14 @@ class Convert:
 
     def get_pycoingecko_ids(self):
         """Gets a list of all coin ids from coingecko API."""
-        url = 'https://api.coingecko.com/api/v3/coins/list'
+        url = f'https://api.coingecko.com/api/v3/coins/list&{self.api_demo_string}={self.api_key}'
 
         r = requests.get(url)
         response_dicts = r.json()
         return response_dicts
 
     def get_pycoingecko_symbols(self):
-        url = 'https://api.coingecko.com/api/v3/simple/supported_vs_currencies'
+        url = 'https://api.coingecko.com/api/v3/simple/supported_vs_currencies&{self.api_demo_string}={self.api_key}'
         r = requests.get(url)
         response_list = r.json()
         return response_list
@@ -127,7 +135,7 @@ class Convert:
     def get_simple_price(self,id,vs):
         """Gets a basic pair price from the API."""
         url = \
-            f"https://api.coingecko.com/api/v3/simple/price?ids={id}&vs_currencies={vs}"
+            f"https://api.coingecko.com/api/v3/simple/price?ids={id}&vs_currencies={vs}&{self.api_demo_string}={self.api_key}"
         r = requests.get(url)
         response_dict = r.json()
         price = response_dict[f"{id}"][f"{vs}"]

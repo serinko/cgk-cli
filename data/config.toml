@@ -1,1 +1,5 @@
+# API KEYS
+coingecko_api_key = ""
+
+# DEFAULT ASSET
 underlying_asset = "usd"

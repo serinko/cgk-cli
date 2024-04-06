@@ -9,14 +9,15 @@ import sys
 from portfolio import Portfolio
 from convert import Convert
 from date import CgkDate
-
+from cgkapi import CgkApi
 
 class CoingeckoCLI:
 
     def __init__(self):
         self.convert = Convert()
         self.date = CgkDate()
-        self.portfolio = Portfolio()
+        #self.portfolio = Portfolio()
+        self.api = CgkApi()
 
     def parser_main(self):
         """Main function initializing ArgumentParser, storing arguments and executing commands."""
@@ -29,10 +30,10 @@ class CoingeckoCLI:
         parser.add_argument("-V","--version", action="version", version='%(prog)s 1.0.0')
         # Sub-command parsers
         subparsers = parser.add_subparsers(help="{subcommand}[-h] shows all the options")
-        parser_convert = subparsers.add_parser('convert',help='{C}[id][vs_currency]([--amount][--switch]) - example: ./cgk.py C monero btc 10', aliases=['C'])
-        parser_list = subparsers.add_parser('list', help='displays list of convertable coins {L}[--argument]',aliases=['L'])
-        parser_portfolio = subparsers.add_parser('portfolio',help='Manage your crypto portfolios locally',aliases=['P'])
-
+        parser_convert = subparsers.add_parser('convert',help='{C}[id][vs_currency]([--amount][--switch]) - example: ./cgk.py C monero btc 10', aliases=['c','C'])
+        parser_list = subparsers.add_parser('list', help='displays list of convertable coins {L}[--argument]',aliases=['l','L'])
+        parser_portfolio = subparsers.add_parser('portfolio',help='Manage your crypto portfolios locally',aliases=['p','P'])
+        parser_api = subparsers.add_parser('api',help='Manage your API keys',aliases=['a','A'])
         # Convert - arguments
         parser_convert.add_argument("id",
                         help="add an id of an asset to convert")
@@ -62,7 +63,11 @@ class CoingeckoCLI:
         parser_portfolio.add_argument("-c","--create",help="create a new portfolio", action="store_true")
         parser_portfolio.add_argument("-n","--name",help="portfolio name <NAME>", type=str)
         parser_portfolio.add_argument("-a","--add_asset",help="add any coingesko listed coin, for help run cgk L --id_all",type=str)
-        parser_portfolio.set_defaults(func=self.portfolio.arg_parser)
+        #parser_portfolio.set_defaults(func=self.portfolio.arg_parser)
+
+        # API arguments
+        parser_api.add_argument("-a","--add_key", help="Adds a new API key to local config file", type=str)
+        parser_api.set_defaults(func=self.api.arg_parser)
 
         args = parser.parse_args()
 
