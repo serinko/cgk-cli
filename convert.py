@@ -36,10 +36,23 @@ class Convert:
     def get_pycoingecko_ids(self):
         """Gets a list of all coin ids from coingecko API."""
         url = f'https://api.coingecko.com/api/v3/coins/list&{self.api_demo_string}={self.api_key}'
+        url2 = 'https://api.coingecko.com/api/v3/coins/list'
 
-        r = requests.get(url)
-        response_dicts = r.json()
-        return response_dicts
+        r = requests.get(url2)
+        if r.status_code == 200:
+            response_dicts = r.json()
+            return response_dicts
+        else:
+            if r.status_code == 403:
+                msg = "Yor IP or API is blocked to query this request"
+            else:
+                msg = ""
+
+            self.panic_api_response(self, status_code, msg):
+
+    def painc_api_response(self, status_code, msg):
+            print(f"Error: API response {status_code}\n{msg}", file=sys.stderr)
+            sys.exit(-1)
 
     def get_pycoingecko_symbols(self):
         url = 'https://api.coingecko.com/api/v3/simple/supported_vs_currencies&{self.api_demo_string}={self.api_key}'

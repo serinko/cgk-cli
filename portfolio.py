@@ -32,7 +32,6 @@ class Portfolio():
     def __init__(self):
         self.date = CgkDate()
         self.convert = Convert()
-        self.id_list = self.convert.save_id_list()
         self.data_dir_path = "~/.config/cgk-cli/portfolios/"
         self.create_data_dir = self.convert.create_data_dir()
         self.underlying_asset = self.read_underlying_asset()
@@ -236,7 +235,8 @@ class Portfolio():
         # Do you want to see portfolio? y/n
 
     def check_asset_id(self,id, df):
-        if id in self.id_list and id not in df.Asset.values:
+        id_list = self.convert.save_id_list()
+        if id in id_list and id not in df.Asset.values:
             return True
         else:
             return False
