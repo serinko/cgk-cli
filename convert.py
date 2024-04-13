@@ -39,18 +39,19 @@ class Convert:
         url2 = 'https://api.coingecko.com/api/v3/coins/list'
 
         r = requests.get(url2)
-        if r.status_code == 200:
+        status_code = r.status_code
+        if status_code == 200:
             response_dicts = r.json()
             return response_dicts
         else:
-            if r.status_code == 403:
-                msg = "Yor IP or API is blocked to query this request"
+            if status_code == 403:
+                msg = "Yor IP or API is blocked to query this request, try to change an IP."
             else:
                 msg = ""
 
-            self.panic_api_response(self, status_code, msg):
+            self.panic_api_response(status_code, msg)
 
-    def painc_api_response(self, status_code, msg):
+    def panic_api_response(self, status_code, msg):
             print(f"Error: API response {status_code}\n{msg}", file=sys.stderr)
             sys.exit(-1)
 
