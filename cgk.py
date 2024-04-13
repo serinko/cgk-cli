@@ -80,6 +80,9 @@ class CoingeckoCLI:
             msg = f"{e}.\n{Style.BRIGHT}Your 'id' or 'vs_currency' was incorrect. Please run: {Fore.YELLOW}cgk list --help{Style.RESET_ALL}"\
             "\nPossibly you run out of yur API quote, check your dashboard."
             self.panic(msg)
+        except ConnectionError as e:
+            msg = f"{e}.\nYou appear to be offline."
+            self.panic(msg)
 
 
     def panic(self,msg):

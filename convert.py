@@ -36,8 +36,8 @@ class Convert:
     def get_pycoingecko_ids(self):
         """Gets a list of all coin ids from coingecko API."""
         url = f'https://api.coingecko.com/api/v3/coins/list&{self.api_demo_string}={self.api_key}'
-        #url2 = 'https://api.coingecko.com/api/v3/coins/list'
-        r = requests.get(url)
+        url2 = 'https://api.coingecko.com/api/v3/coins/list'
+        r = requests.get(url2)
         status_code = r.status_code
         if status_code == 200:
             response_dicts = r.json()
