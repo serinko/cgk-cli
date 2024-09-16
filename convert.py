@@ -55,7 +55,7 @@ class Convert:
             sys.exit(-1)
 
     def get_pycoingecko_symbols(self):
-        url = 'https://api.coingecko.com/api/v3/simple/supported_vs_currencies&{self.api_demo_string}={self.api_key}'
+        url = f'https://api.coingecko.com/api/v3/simple/supported_vs_currencies&{self.api_demo_string}={self.api_key}'
         r = requests.get(url)
         response_list = r.json()
         return response_list
